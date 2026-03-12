@@ -1,10 +1,13 @@
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
+import Link from "next/link"
 
 export default function Home() {
   return (
-    <section className="container mx-auto px-6 py-24">
-      <div className="max-w-3xl space-y-6">
+    <main className="container mx-auto px-6 py-24">
+
+      <section className="max-w-3xl space-y-6">
+
         <Badge variant="secondary">
           Ingeniero en Sistemas en formación
         </Badge>
@@ -19,12 +22,21 @@ export default function Home() {
         </p>
 
         <div className="flex gap-4">
-          <Button size="lg">Ver proyectos</Button>
+
+          <Button size="lg" asChild>
+            <Link href="/projects">
+              Ver proyectos
+            </Link>
+          </Button>
+
           <Button size="lg" variant="outline">
             Contactarme
           </Button>
+
         </div>
-      </div>
-    </section>
+
+      </section>
+
+    </main>
   )
 }
