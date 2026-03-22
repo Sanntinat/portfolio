@@ -1,7 +1,7 @@
+import Link from "next/link"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import Link from "next/link"
+import Image from "next/image"
 
 type ProjectCardProps = {
   title: string
@@ -9,42 +9,57 @@ type ProjectCardProps = {
   tech: string[]
   github: string
   slug: string
+  image: string
 }
 
 export default function ProjectCard({
   title,
   description,
   tech,
-  github,
   slug,
+  image,
 }: ProjectCardProps) {
   return (
     <Link href={`/projects/${slug}`}>
-  <Card className="hover:shadow-lg transition cursor-pointer">
-    <Card className="hover:shadow-lg transition">
-      <CardHeader>
-        <CardTitle>{title}</CardTitle>
-      </CardHeader>
+      <Card className="group overflow-hidden border hover:border-primary/50 transition-all duration-300 hover:shadow-xl cursor-pointer flex flex-col h-full">
 
-      <CardContent className="space-y-4">
-        <p className="text-muted-foreground">{description}</p>
+        {/* Imagen preview */}
+        <div className="relative aspect-video overflow-hidden">
+          {image && (
+            <Image
+            src={image}
+            alt={title}
+            fill
+            className="object-cover transition-transform duration-300 group-hover:scale-105"
+          />)}
 
-        <div className="flex flex-wrap gap-2">
-          {tech.map((t) => (
-            <Badge key={t} variant="secondary">
-              {t}
-            </Badge>
-          ))}
+          {/* overlay sutil */}
+          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition" />
         </div>
 
-        <Button asChild>
-          <a href={github} target="_blank">
-            Ver código
-          </a>
-        </Button>
-      </CardContent>
-    </Card>
-  </Card>
-  </Link>
+        <CardHeader>
+          <CardTitle className="text-xl">
+            {title}
+          </CardTitle>
+        </CardHeader>
+
+        <CardContent className="flex flex-col justify-between flex-1 space-y-4">
+
+          <p className="text-sm text-muted-foreground line-clamp-2">
+            {description}
+          </p>
+
+          <div className="flex flex-wrap gap-2">
+            {tech.map((t) => (
+              <Badge key={t} variant="secondary">
+                {t}
+              </Badge>
+            ))}
+          </div>
+
+        </CardContent>
+
+      </Card>
+    </Link>
   )
 }
