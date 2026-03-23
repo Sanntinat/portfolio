@@ -7,8 +7,8 @@ export default function Background() {
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
-      const x = (e.clientX / window.innerWidth - 0.5) * 20
-      const y = (e.clientY / window.innerHeight - 0.5) * 20
+      const x = (e.clientX / window.innerWidth - 0.5) * 30
+      const y = (e.clientY / window.innerHeight - 0.5) * 30
       setOffset({ x, y })
     }
 
@@ -17,27 +17,46 @@ export default function Background() {
   }, [])
 
   return (
-    <div
-      className="fixed inset-0 -z-10 overflow-hidden"
-      style={{
-        transform: `translate(${offset.x}px, ${offset.y}px)`
-      }}
-    >
+    <div className="fixed inset-0 -z-10 overflow-hidden">
 
-      {/* Gradient animado */}
-      <div className="absolute inset-0 animate-gradient 
-        bg-[linear-gradient(120deg,#e2e8f0,#f8fafc,#e2e8f0)] 
-        dark:bg-[linear-gradient(120deg,#0f172a,#020617,#0f172a)] 
-        opacity-70 dark:opacity-60"
-      />
+      <div
+        className="absolute inset-0 transition-transform duration-300"
+        style={{
+          transform: `translate(${offset.x}px, ${offset.y}px)`
+        }}
+      >
+        <div className="
+          absolute inset-0
+          bg-[linear-gradient(120deg,#f1f5f9,#e2e8f0,#f8fafc)]
+          dark:bg-[linear-gradient(120deg,#020617,#0f172a,#020617)]
+        " />
+      </div>
 
-      {/* Luces */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[300px] bg-primary/20 dark:bg-primary/10 blur-[140px] rounded-full" />
+      <div className="
+        absolute top-[-100px] left-1/2 -translate-x-1/2
+        w-[900px] h-[400px]
+        bg-blue-500/30 dark:bg-blue-500/20
+        blur-[160px]
+        rounded-full
+        animate-pulse
+      " />
 
-      <div className="absolute bottom-0 right-1/3 w-[500px] h-[250px] bg-blue-500/10 dark:bg-blue-500/5 blur-[140px] rounded-full" />
+      <div className="
+        absolute bottom-[-100px] right-1/3
+        w-[700px] h-[300px]
+        bg-cyan-400/20 dark:bg-cyan-400/10
+        blur-[160px]
+        rounded-full
+        animate-pulse
+      " />
 
-      {/* Grid */}
-      <div className="absolute inset-0 opacity-[0.06] dark:opacity-[0.03] bg-[radial-gradient(circle_at_1px_1px,white_1px,transparent_0)] bg-[size:22px_22px]" />
+      <div className="
+        absolute inset-0
+        opacity-[0.08] dark:opacity-[0.04]
+        bg-[radial-gradient(circle_at_1px_1px,rgba(0,0,0,0.4)_1px,transparent_0)]
+        dark:bg-[radial-gradient(circle_at_1px_1px,rgba(255,255,255,0.2)_1px,transparent_0)]
+        bg-[size:24px_24px]
+      " />
 
     </div>
   )
