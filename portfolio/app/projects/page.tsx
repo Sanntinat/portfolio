@@ -17,7 +17,6 @@ export default function ProjectsPage() {
             title={project.title}
             description={project.description}
             tech={project.tech}
-            github={project.github}
             slug={project.slug}
             image={project.image}
           />
