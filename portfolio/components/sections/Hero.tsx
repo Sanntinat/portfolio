@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/ui/button"
 import { motion } from "framer-motion"
+import Terminal from "@/components/ui/terminal"
 
 export default function Hero() {
   return (
@@ -59,9 +60,7 @@ export default function Hero() {
         </motion.div>
 
         <div className="relative h-[400px] flex items-center justify-center">
-          <div className="w-full h-full rounded-3xl border border-border/50 bg-background/40 backdrop-blur-xl flex items-center justify-center text-muted-foreground">
-            Interacción
-          </div>
+            <Terminal />
         </div>
 
       </div>
