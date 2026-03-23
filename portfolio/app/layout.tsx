@@ -2,6 +2,12 @@ import Navbar from "@/components/layout/Navbar"
 import { ThemeProvider } from "@/components/theme-provider"
 import Background from "@/components/ui/background"
 import "./globals.css"
+import { Space_Grotesk } from "next/font/google"
+
+const font = Space_Grotesk({
+  subsets: ["latin"],
+  variable: "--font-sans",
+})
 
 export const metadata = {
   title: "Santiago Natalichio | Portfolio",
@@ -13,7 +19,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="es" suppressHydrationWarning>
+    <html lang="es" className={font.variable} suppressHydrationWarning>
       <body className="min-h-screen bg-background text-foreground">
 
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>

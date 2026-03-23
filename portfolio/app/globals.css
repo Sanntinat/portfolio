@@ -130,3 +130,7 @@
   background-size: 200% 200%;
   animation: gradientMove 25s ease infinite;
 }
+
+body {
+  font-family: var(--font-sans);
+}
