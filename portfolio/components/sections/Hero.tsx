@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button"
 import { motion } from "framer-motion"
 import Terminal from "@/components/ui/terminal"
+import Link from "next/link"
 
 export default function Hero() {
   return (
@@ -49,9 +50,11 @@ export default function Hero() {
             </div>
 
             <div className="flex gap-4">
-                <Button size="lg" className="px-6 py-3 text-lg">
-                Ver proyectos
-                </Button>
+                <Link href="/projects">
+                  <Button size="lg" className="px-6 py-3 text-lg">
+                    Ver proyectos
+                  </Button>
+                </Link>
 
                 <Button size="lg" variant="outline" className="px-6 py-3 text-lg">
                 Contactarme
