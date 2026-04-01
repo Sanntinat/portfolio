@@ -19,7 +19,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="es" className={font.variable} suppressHydrationWarning>
+    <html lang="es" className={`${font.variable} scroll-smooth`} suppressHydrationWarning>
       <body className="min-h-screen bg-background text-foreground">
 
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react"
 import { useRouter } from "next/navigation"
+import { Button } from "@/components/ui/button"
 
 const initialLines = [
   "Welcome to Santiago's terminal 👋",
@@ -29,6 +30,7 @@ export default function Terminal() {
   const [historyIndex, setHistoryIndex] = useState<number | null>(null)
 
   const containerRef = useRef<HTMLDivElement>(null)
+  const inputRef = useRef<HTMLInputElement>(null)
   const router = useRouter()
 
   // 🔥 AUTO SCROLL
@@ -95,7 +97,7 @@ export default function Terminal() {
         output = ["Loading projects..."]
         setTimeout(() => {
           setQueue((prev) => [...prev, "Done ✓"])
-          router.push("/projects")
+          router.push("/#projects")
         }, 1200)
         break
 
@@ -103,7 +105,7 @@ export default function Terminal() {
         output = ["Opening contact..."]
         setTimeout(() => {
           setQueue((prev) => [...prev, "Done ✓"])
-          router.push("/contact")
+          router.push("/#contact")
         }, 1000)
         break
 
@@ -114,6 +116,9 @@ export default function Terminal() {
           "Django • React • PostgreSQL",
           "Focused on scalable systems 🚀",
         ]
+        setTimeout(() => {
+          router.push("/#about")
+        }, 600)
         break
 
       case "github":
@@ -217,6 +222,7 @@ export default function Terminal() {
 
         overflow-hidden
       "
+      onClick={() => inputRef.current?.focus()}
     >
       {/* Scanline */}
       <div
@@ -261,17 +267,79 @@ export default function Terminal() {
         <div className="flex items-center">
           <span className="mr-2">{">"}</span>
           <input
+            ref={inputRef}
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={handleKeyDown}
             autoFocus
+            inputMode="text"
+            enterKeyHint="done"
+            autoCapitalize="none"
+            autoCorrect="off"
+            spellCheck={false}
+            placeholder="Escribí un comando"
             className="
               bg-transparent
               outline-none
               flex-1
               text-primary
+              min-w-0
             "
           />
+        </div>
+
+        <div className="mt-4 grid grid-cols-2 gap-2 md:hidden">
+          <Button
+            type="button"
+            variant="outline"
+            size="sm"
+            className="rounded-full"
+            onClick={() => {
+              handleCommand("projects")
+              inputRef.current?.focus()
+            }}
+          >
+            projects
+          </Button>
+
+          <Button
+            type="button"
+            variant="outline"
+            size="sm"
+            className="rounded-full"
+            onClick={() => {
+              handleCommand("about")
+              inputRef.current?.focus()
+            }}
+          >
+            about
+          </Button>
+
+          <Button
+            type="button"
+            variant="outline"
+            size="sm"
+            className="rounded-full"
+            onClick={() => {
+              handleCommand("contact")
+              inputRef.current?.focus()
+            }}
+          >
+            contact
+          </Button>
+
+          <Button
+            type="button"
+            variant="outline"
+            size="sm"
+            className="rounded-full"
+            onClick={() => {
+              handleCommand("help")
+              inputRef.current?.focus()
+            }}
+          >
+            help
+          </Button>
         </div>
       </div>
     </div>

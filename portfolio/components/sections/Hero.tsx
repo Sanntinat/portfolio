@@ -7,8 +7,8 @@ import Link from "next/link"
 
 export default function Hero() {
   return (
-    <section className="container mx-auto px-6 pt-40 pb-20">
-      <div className="grid lg:grid-cols-2 gap-12 items-center">
+    <section id="hero" className="container mx-auto scroll-mt-32 px-6 pt-36 pb-24">
+      <div className="grid items-center gap-12 lg:grid-cols-2">
 
         <motion.div
             initial={{ opacity: 0, y: 40 }}
@@ -16,7 +16,7 @@ export default function Hero() {
             transition={{ duration: 0.6 }}
             className="space-y-8"
             >
-            <h1 className="text-7xl lg:text-7xl font-bold tracking-tight leading-tight">
+            <h1 className="max-w-3xl text-5xl font-bold tracking-tight leading-tight sm:text-6xl lg:text-7xl">
                 Hola, soy{" "}
                 <span className="bg-gradient-to-r from-blue-500 to-cyan-400 bg-clip-text text-transparent">
                 Santiago Natalichio
@@ -50,19 +50,21 @@ export default function Hero() {
             </div>
 
             <div className="flex gap-4">
-                <Link href="/projects">
+                <Link href="/#projects">
                   <Button size="lg" className="px-6 py-3 text-lg">
                     Ver proyectos
                   </Button>
                 </Link>
 
-                <Button size="lg" variant="outline" className="px-6 py-3 text-lg">
-                Contactarme
-                </Button>
+                <Link href="/#contact">
+                  <Button size="lg" variant="outline" className="px-6 py-3 text-lg">
+                    Contactarme
+                  </Button>
+                </Link>
             </div>
         </motion.div>
 
-        <div className="relative h-[400px] flex items-center justify-center">
+        <div className="relative flex h-[400px] items-center justify-center">
             <Terminal />
         </div>
 
