@@ -2,25 +2,36 @@
 
 import { useTheme } from "next-themes"
 import { useEffect, useState } from "react"
-import { Sun, Moon } from "lucide-react"
+import { Moon, Sun } from "lucide-react"
 
+/**
+ * Alterna entre la hoja de plano y el cianotipo. Reserva su espacio antes de
+ * montar para que la barra no salte al hidratar.
+ */
 export function ThemeToggle() {
-  const { theme, setTheme } = useTheme()
+  const { resolvedTheme, setTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
 
-  useEffect(() => {
-    setMounted(true)
-  }, [])
+  useEffect(() => setMounted(true), [])
 
-  // 🚨 CLAVE
-  if (!mounted) return null
+  const isDark = resolvedTheme === "dark"
 
   return (
     <button
-      onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-      className="p-2 rounded-md hover:bg-muted transition"
+      type="button"
+      onClick={() => setTheme(isDark ? "light" : "dark")}
+      aria-label={mounted ? (isDark ? "Usar tema claro" : "Usar tema oscuro") : "Cambiar tema"}
+      className="flex size-9 items-center justify-center border border-rule text-ink-soft transition-colors duration-200 hover:border-ink hover:text-ink"
     >
-      {theme === "dark" ? <Moon size={18} /> : <Sun size={18} />}
+      {mounted ? (
+        isDark ? (
+          <Moon className="size-4" strokeWidth={1.5} />
+        ) : (
+          <Sun className="size-4" strokeWidth={1.5} />
+        )
+      ) : (
+        <span className="size-4" />
+      )}
     </button>
   )
 }

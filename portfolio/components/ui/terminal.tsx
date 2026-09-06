@@ -97,7 +97,7 @@ export default function Terminal() {
         output = ["Loading projects..."]
         setTimeout(() => {
           setQueue((prev) => [...prev, "Done ✓"])
-          router.push("/#projects")
+          router.push("/#proyectos")
         }, 1200)
         break
 
@@ -105,7 +105,7 @@ export default function Terminal() {
         output = ["Opening contact..."]
         setTimeout(() => {
           setQueue((prev) => [...prev, "Done ✓"])
-          router.push("/#contact")
+          router.push("/#contacto")
         }, 1000)
         break
 
@@ -117,7 +117,7 @@ export default function Terminal() {
           "Focused on scalable systems 🚀",
         ]
         setTimeout(() => {
-          router.push("/#about")
+          router.push("/#perfil")
         }, 600)
         break
 

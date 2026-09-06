@@ -33,7 +33,7 @@ export default function Contact() {
   }
 
   return (
-    <section id="contact" className="container mx-auto scroll-mt-32 px-6 py-24 pb-32">
+    <section id="contacto" className="container mx-auto scroll-mt-32 px-6 py-24 pb-32">
       <Card className="overflow-hidden border-border/60 bg-card/80 backdrop-blur-sm">
         <CardContent className="grid gap-8 p-6 sm:p-8 lg:grid-cols-[1fr_1fr] lg:p-10">
           <div className="space-y-5">

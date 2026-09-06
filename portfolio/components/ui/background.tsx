@@ -1,63 +1,35 @@
-"use client"
-
-import { useEffect, useState } from "react"
-
+/**
+ * El campo de dibujo del pliego. Retícula menor de 32px y mayor de 128px,
+ * atenuada hacia el pie para que el contenido respire. Sin parallax, sin
+ * manchas desenfocadas: es la lámina sobre la que está dibujada la página.
+ */
 export default function Background() {
-  const [offset, setOffset] = useState({ x: 0, y: 0 })
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      const x = (e.clientX / window.innerWidth - 0.5) * 30
-      const y = (e.clientY / window.innerHeight - 0.5) * 30
-      setOffset({ x, y })
-    }
-
-    window.addEventListener("mousemove", handleMouseMove)
-    return () => window.removeEventListener("mousemove", handleMouseMove)
-  }, [])
-
   return (
-    <div className="fixed inset-0 -z-10 overflow-hidden">
+    <div aria-hidden className="pointer-events-none fixed inset-0 -z-10">
+      <div className="absolute inset-0 bg-sheet" />
 
       <div
-        className="absolute inset-0 transition-transform duration-300"
+        className="sheet-grid absolute inset-0 opacity-70"
         style={{
-          transform: `translate(${offset.x}px, ${offset.y}px)`
+          maskImage:
+            "linear-gradient(to bottom, black 0%, black 55%, transparent 100%)",
+          WebkitMaskImage:
+            "linear-gradient(to bottom, black 0%, black 55%, transparent 100%)",
         }}
-      >
-        <div className="
-          absolute inset-0
-          bg-[linear-gradient(120deg,#f1f5f9,#e2e8f0,#f8fafc)]
-          dark:bg-[linear-gradient(120deg,#020617,#0f172a,#020617)]
-        " />
-      </div>
+      />
 
-      <div className="
-        absolute top-[-100px] left-1/2 -translate-x-1/2
-        w-[900px] h-[400px]
-        bg-blue-500/30 dark:bg-blue-500/20
-        blur-[160px]
-        rounded-full
-        animate-pulse
-      " />
+      <div
+        className="sheet-grid-major absolute inset-0 opacity-60"
+        style={{
+          maskImage:
+            "linear-gradient(to bottom, black 0%, black 45%, transparent 95%)",
+          WebkitMaskImage:
+            "linear-gradient(to bottom, black 0%, black 45%, transparent 95%)",
+        }}
+      />
 
-      <div className="
-        absolute bottom-[-100px] right-1/3
-        w-[700px] h-[300px]
-        bg-cyan-400/20 dark:bg-cyan-400/10
-        blur-[160px]
-        rounded-full
-        animate-pulse
-      " />
-
-      <div className="
-        absolute inset-0
-        opacity-[0.08] dark:opacity-[0.04]
-        bg-[radial-gradient(circle_at_1px_1px,rgba(0,0,0,0.4)_1px,transparent_0)]
-        dark:bg-[radial-gradient(circle_at_1px_1px,rgba(255,255,255,0.2)_1px,transparent_0)]
-        bg-[size:24px_24px]
-      " />
-
+      {/* Borde de lámina: el papel se asienta apenas más oscuro en los cantos. */}
+      <div className="absolute inset-0 bg-[radial-gradient(120%_90%_at_50%_0%,transparent_55%,var(--sheet-sunk)_100%)] opacity-60" />
     </div>
   )
 }

@@ -7,7 +7,7 @@ import Link from "next/link"
 
 export default function Hero() {
   return (
-    <section id="hero" className="container mx-auto scroll-mt-32 px-6 pt-36 pb-24">
+    <section id="inicio" className="container mx-auto scroll-mt-32 px-6 pt-36 pb-24">
       <div className="grid items-center gap-12 lg:grid-cols-2">
 
         <motion.div
@@ -50,13 +50,13 @@ export default function Hero() {
             </div>
 
             <div className="flex gap-4">
-                <Link href="/#projects">
+                <Link href="/#proyectos">
                   <Button size="lg" className="px-6 py-3 text-lg">
                     Ver proyectos
                   </Button>
                 </Link>
 
-                <Link href="/#contact">
+                <Link href="/#contacto">
                   <Button size="lg" variant="outline" className="px-6 py-3 text-lg">
                     Contactarme
                   </Button>

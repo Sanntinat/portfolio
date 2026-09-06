@@ -2,6 +2,8 @@ import type { Metadata, Viewport } from "next"
 import { Archivo, Azeret_Mono } from "next/font/google"
 
 import Navbar from "@/components/layout/Navbar"
+import SheetFooter from "@/components/layout/SheetFooter"
+import SheetRail from "@/components/layout/SheetRail"
 import { ThemeProvider } from "@/components/theme-provider"
 import Background from "@/components/ui/background"
 import "./globals.css"
@@ -58,10 +60,21 @@ export default function RootLayout({
       <body className="min-h-screen bg-sheet text-ink antialiased">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <Background />
+          <SheetRail />
 
-          <div className="flex min-h-screen flex-col">
+          <a
+            href="#contenido"
+            className="annot sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:border focus:border-ink focus:bg-sheet-raised focus:px-3 focus:py-2 focus:text-ink"
+          >
+            Saltar al contenido
+          </a>
+
+          <div className="flex min-h-screen flex-col lg:pl-14">
             <Navbar />
-            <main className="flex-1">{children}</main>
+            <main id="contenido" className="flex-1">
+              {children}
+            </main>
+            <SheetFooter />
           </div>
         </ThemeProvider>
       </body>

@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button"
 
 export default function ProjectsSection() {
   return (
-    <section id="projects" className="container mx-auto scroll-mt-32 px-6 py-24">
+    <section id="proyectos" className="container mx-auto scroll-mt-32 px-6 py-24">
       <div className="mb-12 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
         <div className="max-w-3xl space-y-4">
           <span className="inline-flex items-center rounded-full border border-border/60 bg-background/70 px-4 py-2 text-sm font-medium text-muted-foreground backdrop-blur">

@@ -30,7 +30,7 @@ export default async function ProjectPage({
     <main className="container mx-auto px-6 py-8 sm:py-10 lg:py-16">
       <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <Button asChild variant="outline" className="w-fit rounded-full px-5">
-          <Link href="/#projects">
+          <Link href="/#proyectos">
             <ArrowLeft className="size-4" />
             Volver a proyectos
           </Link>

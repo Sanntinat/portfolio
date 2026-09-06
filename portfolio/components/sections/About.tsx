@@ -24,7 +24,7 @@ const skills = ["React", "Next.js", "TypeScript", "Django", "PostgreSQL", "Tailw
 
 export default function About() {
   return (
-    <section id="about" className="container mx-auto scroll-mt-32 px-6 py-24">
+    <section id="perfil" className="container mx-auto scroll-mt-32 px-6 py-24">
       <div className="mb-12 max-w-3xl space-y-4">
         <span className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-background/70 px-4 py-2 text-sm font-medium text-muted-foreground backdrop-blur">
           <Sparkles className="size-4 text-primary" />
