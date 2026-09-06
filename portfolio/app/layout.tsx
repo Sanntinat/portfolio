@@ -39,6 +39,8 @@ export const metadata: Metadata = {
     description:
       "Aplicaciones completas con Django, React y PostgreSQL. Del modelo de datos a la interfaz.",
   },
+  // Sin esto X recorta la tarjeta a un cuadrado y se come el dibujo.
+  twitter: { card: "summary_large_image" },
 }
 
 export const viewport: Viewport = {
