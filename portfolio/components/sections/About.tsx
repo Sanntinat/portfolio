@@ -1,102 +1,98 @@
-import { Badge } from "@/components/ui/badge"
-import { Card, CardContent } from "@/components/ui/card"
-import { Code2, GraduationCap, Rocket, Sparkles } from "lucide-react"
+import SectionHead from "@/components/layout/SectionHead"
 
-const highlights = [
+/**
+ * El recorrido que Santiago dice seguir para construir una aplicación. Es una
+ * secuencia real —el modelo de datos precede a la API, que precede a la
+ * interfaz—, así que se dibuja numerada y encadenada, como un esquema.
+ */
+const pipeline = [
   {
-    icon: GraduationCap,
-    title: "Formación",
-    text: "Estudiante avanzado de Ingeniería en Sistemas de Información, con foco en bases sólidas y criterio técnico.",
+    stage: "Modelo de datos",
+    detail:
+      "Qué entidades existen, cómo se relacionan y qué tiene que ser cierto siempre.",
+    tool: "PostgreSQL",
   },
   {
-    icon: Code2,
-    title: "Stack",
-    text: "Trabajo con React, Next.js, Django, PostgreSQL y herramientas modernas para construir productos claros y mantenibles.",
+    stage: "API",
+    detail:
+      "Endpoints REST con permisos y roles, y una respuesta previsible para cada caso.",
+    tool: "Django REST Framework",
   },
   {
-    icon: Rocket,
-    title: "Objetivo",
-    text: "Me interesa participar en proyectos reales donde pueda aportar valor, obtener conocimiento y mejorar la experiencia del usuario.",
+    stage: "Interfaz",
+    detail:
+      "Pantallas que dejan claro el estado del sistema, incluso cuando algo falla.",
+    tool: "React · Next.js",
   },
 ]
 
-const skills = ["React", "Next.js", "TypeScript", "Django", "PostgreSQL", "Tailwind", "APIs REST", "UI systems"]
+const spec = [
+  { field: "Formación", value: "Ingeniería en Sistemas de Información, en curso" },
+  { field: "Base de datos", value: "PostgreSQL · modelado relacional" },
+  { field: "Servidor", value: "Django · Django REST Framework" },
+  { field: "Interfaz", value: "React · Next.js · TypeScript · Tailwind CSS" },
+  { field: "Mobile", value: "React Native · Expo" },
+  { field: "Herramientas", value: "Git · Postman" },
+]
 
 export default function About() {
   return (
-    <section id="perfil" className="container mx-auto scroll-mt-32 px-6 py-24">
-      <div className="mb-12 max-w-3xl space-y-4">
-        <span className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-background/70 px-4 py-2 text-sm font-medium text-muted-foreground backdrop-blur">
-          <Sparkles className="size-4 text-primary" />
-          Sobre mí
-        </span>
+    <section
+      id="perfil"
+      className="mx-auto max-w-[92rem] scroll-mt-14 px-5 py-24 sm:px-8"
+    >
+      <SectionHead
+        sectionRef="B"
+        title="Empiezo por el modelo de datos, no por la pantalla."
+      />
 
-        <h2 className="text-4xl font-bold tracking-tight sm:text-5xl">
-          Diseño productos con foco en claridad, estructura y buena experiencia.
-        </h2>
+      <div className="mt-12 grid gap-16 lg:grid-cols-[1fr_22rem] lg:gap-20">
+        <div>
+          <p className="measure text-lg leading-relaxed text-ink">
+            Estudio ingeniería en sistemas, así que arranco preguntando qué
+            entidades existen y cómo se relacionan. Recién después escribo la API
+            y la interfaz. Es más lento al principio, y evita tener que reescribir
+            todo a mitad de camino.
+          </p>
 
-        <p className="max-w-2xl text-lg text-muted-foreground">
-          Me gusta construir interfaces limpias y sistemas con una base sólida. Busco que el frontend,
-          la arquitectura y el detalle visual empujen en la misma dirección.
-        </p>
-      </div>
+          <ol className="mt-12 border-t border-rule">
+            {pipeline.map((step, index) => (
+              <li
+                key={step.stage}
+                className="grid grid-cols-[2.5rem_1fr] items-baseline gap-x-4 border-b border-rule py-6 sm:grid-cols-[2.5rem_10rem_1fr] sm:gap-x-8"
+              >
+                <span aria-hidden className="annot text-mark">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
 
-      <div className="grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
-        <div className="grid gap-6">
-          {highlights.map((item) => {
-            const Icon = item.icon
+                <h3 className="plot-heading text-xl text-ink">{step.stage}</h3>
 
-            return (
-              <Card key={item.title} className="border-border/60 bg-card/80 backdrop-blur-sm">
-                <CardContent className="flex items-start gap-4 p-6">
-                  <div className="rounded-2xl border border-primary/20 bg-primary/10 p-3 text-primary">
-                    <Icon className="size-5" />
-                  </div>
-
-                  <div className="space-y-2">
-                    <h3 className="text-xl font-semibold">{item.title}</h3>
-                    <p className="text-muted-foreground">{item.text}</p>
-                  </div>
-                </CardContent>
-              </Card>
-            )
-          })}
+                <div className="col-start-2 sm:col-start-3">
+                  <p className="max-w-[52ch] text-ink-soft">{step.detail}</p>
+                  <p className="annot mt-2 text-ink-faint">{step.tool}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
         </div>
 
-        <Card className="border-border/60 bg-background/60 backdrop-blur-xl">
-          <CardContent className="space-y-6 p-6">
-            <div className="space-y-2">
-              <p className="text-sm uppercase tracking-[0.25em] text-muted-foreground">Perfil</p>
-              <h3 className="text-2xl font-semibold">Construcción, criterio y entrega.</h3>
-            </div>
+        {/* Cuadro de referencias de la lámina. */}
+        <div className="border border-rule bg-sheet-raised">
+          <h3 className="annot border-b border-rule px-4 py-3 text-ink-soft">
+            Referencias
+          </h3>
 
-            <div className="grid gap-3 rounded-3xl border border-border/60 bg-card/60 p-4">
-              <div className="flex items-center justify-between gap-4 text-sm">
-                <span className="text-muted-foreground">Enfoque</span>
-                <span className="font-medium">Frontend + Backend</span>
+          <dl>
+            {spec.map((row) => (
+              <div key={row.field} className="border-b border-rule-soft px-4 py-4 last:border-b-0">
+                <dt className="annot text-ink-faint">{row.field}</dt>
+                <dd className="mt-1.5 text-sm leading-relaxed text-ink">
+                  {row.value}
+                </dd>
               </div>
-              <div className="flex items-center justify-between gap-4 text-sm">
-                <span className="text-muted-foreground">Prioridad</span>
-                <span className="font-medium">UX clara</span>
-              </div>
-              <div className="flex items-center justify-between gap-4 text-sm">
-                <span className="text-muted-foreground">Meta</span>
-                <span className="font-medium">Proyectos reales</span>
-              </div>
-            </div>
-
-            <div className="space-y-3">
-              <p className="text-sm uppercase tracking-[0.25em] text-muted-foreground">Tecnologías</p>
-              <div className="flex flex-wrap gap-2">
-                {skills.map((skill) => (
-                  <Badge key={skill} variant="secondary" className="px-3 py-1 text-sm">
-                    {skill}
-                  </Badge>
-                ))}
-              </div>
-            </div>
-          </CardContent>
-        </Card>
+            ))}
+          </dl>
+        </div>
       </div>
     </section>
   )

@@ -165,12 +165,14 @@ export default async function ProjectPage({
               </div>
 
               <div className="flex flex-col gap-3 sm:flex-row">
-                <Button asChild className="rounded-full px-5">
-                  <a href={project.github} target="_blank" rel="noreferrer">
-                    <Github className="size-4" />
-                    Ver código
-                  </a>
-                </Button>
+                {project.github && (
+                  <Button asChild className="rounded-full px-5">
+                    <a href={project.github} target="_blank" rel="noreferrer">
+                      <Github className="size-4" />
+                      Ver código
+                    </a>
+                  </Button>
+                )}
 
                 {project.demo && (
                   <Button asChild variant="outline" className="rounded-full px-5">

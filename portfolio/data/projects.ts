@@ -1,4 +1,24 @@
-export const projects = [
+/**
+ * Fichas de proyecto. El contenido de cada una está pendiente de completar por
+ * Santiago: los textos, las capturas adicionales y sobre todo `github` y
+ * `demo`, que hoy no apuntan a nada real.
+ */
+export type Project = {
+  slug: string
+  title: string
+  description: string
+  tech: string[]
+  image: string
+  images: string[]
+  features: string[]
+  architecture: string[]
+  /** URL del repositorio, o null mientras no haya una real. */
+  github: string | null
+  /** URL de la demo desplegada, o null si el proyecto no está publicado. */
+  demo: string | null
+}
+
+export const projects: Project[] = [
   {
     slug: "sistema-eventos",
     title: "Sistema de gestión de citas para dentistas",
@@ -9,10 +29,9 @@ export const projects = [
 
     image: "/projects/eventos/preview1.png",
 
-    images: [
-      "/projects/eventos/1.png",
-      "/projects/eventos/2.png",
-  ],
+    // Las capturas 1.png y 2.png no existen en /public; la galería queda
+    // vacía hasta que Santiago suba las reales.
+    images: [],
 
     features: [
       "Autenticación de usuarios",
@@ -28,8 +47,8 @@ export const projects = [
       "Autenticación basada en sesión",
     ],
 
-    github: "https://github.com/",
-    demo: "",
+    github: null,
+    demo: null,
   },
 
   {
@@ -42,10 +61,9 @@ export const projects = [
 
     image: "/projects/eventos/preview3.png",
 
-    images: [
-      "/projects/eventos/1.png",
-      "/projects/eventos/2.png",
-    ],
+    // Las capturas 1.png y 2.png no existen en /public; la galería queda
+    // vacía hasta que Santiago suba las reales.
+    images: [],
 
     features: [
       "Visualización en mapa de calles con estacionamiento medido",
@@ -59,8 +77,8 @@ export const projects = [
       "Geolocalización con Expo Location",
     ],
 
-    github: "https://github.com/",
-    demo: "",
+    github: null,
+    demo: null,
   },
 
   {
@@ -73,10 +91,9 @@ export const projects = [
 
     image: "/projects/eventos/preview2.png",
 
-    images: [
-      "/projects/eventos/1.png",
-      "/projects/eventos/2.png",
-    ],
+    // Las capturas 1.png y 2.png no existen en /public; la galería queda
+    // vacía hasta que Santiago suba las reales.
+    images: [],
 
     features: [
       "Autenticación JWT",
@@ -92,7 +109,7 @@ export const projects = [
       "Postman"
     ],
 
-    github: "https://github.com/",
-    demo: "",
+    github: null,
+    demo: null,
   },
 ]
