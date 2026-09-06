@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@import "shadcn/tailwind.css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -30,27 +29,6 @@
   --mark-wash: rgb(180 51 31 / 0.1);
 
   --grid-cell: 32px;
-
-  /* puentes shadcn */
-  --background: var(--sheet);
-  --foreground: var(--ink);
-  --card: var(--sheet-raised);
-  --card-foreground: var(--ink);
-  --popover: var(--sheet-raised);
-  --popover-foreground: var(--ink);
-  --primary: var(--ink);
-  --primary-foreground: var(--sheet-raised);
-  --secondary: var(--sheet-sunk);
-  --secondary-foreground: var(--ink);
-  --muted: var(--sheet-sunk);
-  --muted-foreground: var(--ink-soft);
-  --accent: var(--sheet-sunk);
-  --accent-foreground: var(--ink);
-  --destructive: var(--mark);
-  --border: var(--rule);
-  --input: var(--rule);
-  --ring: var(--mark);
-  --radius: 2px;
 }
 
 .dark {
@@ -68,8 +46,6 @@
   --mark: #e2603d;
   --mark-ink: #0a1a28;
   --mark-wash: rgb(226 96 61 / 0.14);
-
-  --primary-foreground: var(--sheet-sunk);
 }
 
 @theme inline {
@@ -85,28 +61,10 @@
   --color-mark-ink: var(--mark-ink);
   --color-mark-wash: var(--mark-wash);
 
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-destructive: var(--destructive);
-  --color-border: var(--border);
-  --color-input: var(--input);
-  --color-ring: var(--ring);
-
   --font-sans: var(--font-archivo);
   --font-mono: var(--font-azeret);
 
+  /* Esquinas de dibujo: cualquier rounded-* cae acá, nunca en píldora. */
   --radius-sm: 1px;
   --radius-md: 2px;
   --radius-lg: 3px;
