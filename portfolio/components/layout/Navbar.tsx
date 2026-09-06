@@ -112,6 +112,7 @@ export default function Navbar() {
         {/* Logo */}
         <Link
           href="/#hero"
+          onClick={() => setActiveSection("hero")}
           className="
             text-xl md:text-2xl font-semibold tracking-tight
             hover:opacity-80 transition
@@ -128,6 +129,7 @@ export default function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
+                onClick={() => setActiveSection(link.id)}
                 className="relative group"
               >
                 <span
@@ -214,7 +216,10 @@ export default function Navbar() {
                   <Link
                     key={link.href}
                     href={link.href}
-                    onClick={() => setMobileMenuOpen(false)}
+                    onClick={() => {
+                      setActiveSection(link.id)
+                      setMobileMenuOpen(false)
+                    }}
                     className={`rounded-2xl px-4 py-3 transition ${
                       isActive
                         ? "bg-primary/10 text-primary"

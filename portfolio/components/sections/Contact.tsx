@@ -6,7 +6,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Github, Linkedin, Mail, MessageSquare, Send } from "lucide-react"
 
 const CONTACT_CONFIG = {
-  email: "tu-email@dominio.com",
+  email: "santiagonatalichio03@gmail.com",
   githubUrl: "https://github.com/tu-usuario",
   linkedinUrl: "https://www.linkedin.com/in/tu-usuario/",
 }
@@ -47,7 +47,7 @@ export default function Contact() {
             </h2>
 
             <p className="max-w-2xl text-lg text-muted-foreground">
-              Escribime por el formulario o conectemos por redes. Todo queda configurable en un solo lugar.
+              Escribime por el formulario o conectemos por redes.
             </p>
 
             <div className="flex flex-wrap gap-3">
@@ -74,10 +74,7 @@ export default function Contact() {
             </div>
 
             <div className="rounded-3xl border border-border/60 bg-background/70 p-4 text-sm text-muted-foreground backdrop-blur">
-              <p className="font-medium text-foreground">Configuración rápida</p>
-              <p className="mt-2">
-                Editá el bloque <span className="font-semibold">CONTACT_CONFIG</span> para cambiar email, GitHub y LinkedIn.
-              </p>
+                Prometo responder cada mensaje que llegue, aunque a veces me tome un poco de tiempo.  
             </div>
           </div>
 

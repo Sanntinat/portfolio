@@ -1,13 +1,13 @@
 export const projects = [
   {
     slug: "sistema-eventos",
-    title: "Sistema de Eventos",
+    title: "Sistema de gestión de citas para dentistas",
     description:
-      "Plataforma fullstack para gestión de eventos con autenticación, favoritos y CRUD completo.",
+      "Plataforma fullstack para gestión de citas con autenticación, agenda personalizable y CRUD completo.",
 
     tech: ["Django", "React", "PostgreSQL"],
 
-    image: "/projects/eventos/preview.png",
+    image: "/projects/eventos/preview1.png",
 
     images: [
       "/projects/eventos/1.png",
@@ -33,14 +33,14 @@ export const projects = [
   },
 
   {
-    slug: "app-recetas",
-    title: "App de Recetas",
+    slug: "mapa-estacionamiento-la-plata",
+    title: "Mapa Interactivo de Estacionamiento Medido en La Plata",
     description:
-      "Aplicación mobile desarrollada con React Native y Firebase.",
+      "Proyecto en React Native que muestra un mapa interactivo de La Plata para visualizar calles con estacionamiento medido.",
 
-    tech: ["React Native", "Expo", "Firebase"],
+    tech: ["React Native (Expo)", "React Native Maps", "Expo Location"],
 
-    image: "/projects/eventos/preview.png",
+    image: "/projects/eventos/preview3.png",
 
     images: [
       "/projects/eventos/1.png",
@@ -48,15 +48,15 @@ export const projects = [
     ],
 
     features: [
-      "Registro de usuarios",
-      "Favoritos de recetas",
-      "Listado dinámico",
+      "Visualización en mapa de calles con estacionamiento medido",
+      "Interacción directa con el mapa para explorar zonas",
+      "Ubicación del usuario en tiempo real",
     ],
 
     architecture: [
-      "Frontend mobile con Expo",
-      "Autenticación Firebase",
-      "Firestore como base de datos",
+      "Aplicación mobile con React Native y Expo",
+      "Renderizado cartográfico con React Native Maps",
+      "Geolocalización con Expo Location",
     ],
 
     github: "https://github.com/",
@@ -65,13 +65,13 @@ export const projects = [
 
   {
     slug: "api-reservas",
-    title: "API de Reservas",
+    title: "GYM E-commerce",
     description:
-      "API REST con autenticación JWT y arquitectura modular.",
+      "Plataforma de comercio electrónico para un gimnasio, con autenticación JWT, endpoints REST y arquitectura modular.",
 
-    tech: ["Node", "Express", "MongoDB"],
+    tech: ["Django", "React", "PostgreSQL"],
 
-    image: "/projects/eventos/preview.png",
+    image: "/projects/eventos/preview2.png",
 
     images: [
       "/projects/eventos/1.png",
@@ -85,9 +85,11 @@ export const projects = [
     ],
 
     architecture: [
-      "Node.js + Express",
-      "MongoDB",
-      "Middleware de autenticación",
+      "React",
+      "Material UI",
+      "Django REST Framework",
+      "PostgreSQL",
+      "Postman"
     ],
 
     github: "https://github.com/",

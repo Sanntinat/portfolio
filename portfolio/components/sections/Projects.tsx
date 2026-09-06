@@ -21,10 +21,6 @@ export default function ProjectsSection() {
             flujo simple y una base técnica que escale.
           </p>
         </div>
-
-        <Button asChild variant="outline" className="w-fit rounded-full px-5">
-          <Link href="/projects">Ver todos</Link>
-        </Button>
       </div>
 
       <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
