@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next"
 import { Archivo, Azeret_Mono } from "next/font/google"
 
+import Console from "@/components/console/Console"
 import Navbar from "@/components/layout/Navbar"
 import SheetFooter from "@/components/layout/SheetFooter"
 import SheetRail from "@/components/layout/SheetRail"
@@ -76,6 +77,8 @@ export default function RootLayout({
             </main>
             <SheetFooter />
           </div>
+
+          <Console />
         </ThemeProvider>
       </body>
     </html>

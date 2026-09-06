@@ -1,73 +1,57 @@
-"use client"
+import { ArrowRight, MapPin } from "lucide-react"
 
-import { Button } from "@/components/ui/button"
-import { motion } from "framer-motion"
-import Terminal from "@/components/ui/terminal"
-import Link from "next/link"
+import TrazaLaPlata from "@/components/hero/TrazaLaPlata"
+import ConsoleHint from "@/components/console/ConsoleHint"
+import { ActionAnchor, ActionLink } from "@/components/ui/action"
+import { CONTACT } from "@/lib/sections"
 
 export default function Hero() {
   return (
-    <section id="inicio" className="container mx-auto scroll-mt-32 px-6 pt-36 pb-24">
-      <div className="grid items-center gap-12 lg:grid-cols-2">
+    <section
+      id="inicio"
+      className="mx-auto max-w-[92rem] scroll-mt-14 px-5 pt-16 pb-24 sm:px-8 sm:pt-24 lg:pt-28"
+    >
+      <div className="grid items-start gap-14 lg:grid-cols-[1.05fr_0.95fr] lg:gap-20">
+        <div>
+          <h1 className="plot-title text-[clamp(3rem,11vw,6rem)]">
+            Santiago
+            <br />
+            Natalichio
+          </h1>
 
-        <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="space-y-8"
-            >
-            <h1 className="max-w-3xl text-5xl font-bold tracking-tight leading-tight sm:text-6xl lg:text-7xl">
-                Hola, soy{" "}
-                <span className="bg-gradient-to-r from-blue-500 to-cyan-400 bg-clip-text text-transparent">
-                Santiago Natalichio
-                </span>
-                
-            </h1>
+          <p className="mt-8 max-w-[38ch] text-lg leading-relaxed text-ink sm:text-xl">
+            Estudiante avanzado de Ingeniería en Sistemas de Información.
+            Construyo aplicaciones completas: modelo de datos, API e interfaz.
+          </p>
 
-            <div>
-                <motion.span 
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 }}
-                className="
-                inline-block
-                text-lg lg:text-xl
-                font-medium
+          <p className="measure mt-4 text-base leading-relaxed text-ink-soft">
+            Trabajo con Django, React y PostgreSQL. Me interesa entrar en un
+            equipo donde el trabajo llegue a producción y lo use alguien.
+          </p>
 
-                px-5 py-2
+          <div className="mt-9 flex flex-wrap gap-3">
+            <ActionLink href="#proyectos" variant="solid">
+              Ver proyectos
+              <ArrowRight
+                className="size-4 transition-transform duration-200 group-hover/action:translate-x-1"
+                strokeWidth={1.5}
+              />
+            </ActionLink>
 
-                rounded-full
-                border border-primary/30
+            <ActionAnchor href={`mailto:${CONTACT.email}`}>
+              Escribirme
+            </ActionAnchor>
+          </div>
 
-                bg-gradient-to-r from-blue-500/10 to-cyan-400/10
-                border-blue-400/30
-                text-blue-500
+          <ConsoleHint />
 
-                backdrop-blur-sm
-                ">
-                Estudiante avanzado de Ingeniería en Sistemas de Información
-                </motion.span>
-            </div>
-
-            <div className="flex gap-4">
-                <Link href="/#proyectos">
-                  <Button size="lg" className="px-6 py-3 text-lg">
-                    Ver proyectos
-                  </Button>
-                </Link>
-
-                <Link href="/#contacto">
-                  <Button size="lg" variant="outline" className="px-6 py-3 text-lg">
-                    Contactarme
-                  </Button>
-                </Link>
-            </div>
-        </motion.div>
-
-        <div className="relative flex h-[400px] items-center justify-center">
-            <Terminal />
+          <p className="annot mt-10 flex items-center gap-2 text-ink-faint">
+            <MapPin className="size-3.5" strokeWidth={1.5} />
+            {CONTACT.location}
+          </p>
         </div>
 
+        <TrazaLaPlata />
       </div>
     </section>
   )

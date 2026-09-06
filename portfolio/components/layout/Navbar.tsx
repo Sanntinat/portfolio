@@ -2,10 +2,12 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { FileText, Menu, Terminal, X } from "lucide-react"
 
 import { ThemeToggle } from "@/components/theme-toggle"
+import { useScrolledPast } from "@/lib/client-hooks"
+import { openConsole } from "@/lib/console-bus"
 import { RESUME_URL, SECTIONS, SECTION_IDS } from "@/lib/sections"
 import { useActiveSection } from "@/lib/use-active-section"
 
@@ -18,22 +20,15 @@ export default function Navbar() {
   const pathname = usePathname()
   const isHome = pathname === "/"
 
-  const [scrolled, setScrolled] = useState(false)
-  const [menuOpen, setMenuOpen] = useState(false)
+  const scrolled = useScrolledPast(8)
+
+  // El menú se abre "para esta ruta": al navegar, el pathname cambia y el
+  // menú se cierra solo, sin un efecto que sincronice.
+  const [menuFor, setMenuFor] = useState<string | null>(null)
+  const menuOpen = menuFor === pathname
   const active = useActiveSection(isHome ? SECTION_IDS : [])
 
   const activeSection = SECTIONS.find((section) => section.id === active)
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8)
-    onScroll()
-    window.addEventListener("scroll", onScroll, { passive: true })
-    return () => window.removeEventListener("scroll", onScroll)
-  }, [])
-
-  useEffect(() => setMenuOpen(false), [pathname])
-
-  const openConsole = () => window.dispatchEvent(new Event("plano:console"))
 
   return (
     <header
@@ -125,7 +120,7 @@ export default function Navbar() {
 
           <button
             type="button"
-            onClick={() => setMenuOpen((open) => !open)}
+            onClick={() => setMenuFor(menuOpen ? null : pathname)}
             aria-label={menuOpen ? "Cerrar menú" : "Abrir menú"}
             aria-expanded={menuOpen}
             className="flex size-9 items-center justify-center border border-rule text-ink-soft transition-colors hover:border-ink hover:text-ink"
@@ -148,7 +143,7 @@ export default function Navbar() {
             <Link
               key={section.id}
               href={`/#${section.id}`}
-              onClick={() => setMenuOpen(false)}
+              onClick={() => setMenuFor(null)}
               className="flex items-baseline gap-4 border-b border-rule-soft px-5 py-4 text-ink transition-colors hover:bg-sheet-sunk sm:px-8"
             >
               <span className="annot w-4 text-mark">{section.ref}</span>

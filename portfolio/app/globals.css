@@ -329,3 +329,27 @@
     transition-duration: 0.01ms !important;
   }
 }
+
+/* Barrido de trazado: la retícula del dibujo se revela de izquierda a
+   derecha, como el paso del cabezal del plóter. */
+@keyframes plot-wipe {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+.plot-wipe {
+  clip-path: inset(0 100% 0 0);
+  animation: plot-wipe var(--dur, 1.1s) var(--ease-plot) var(--delay, 0s)
+    forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .plot-wipe {
+    animation: none !important;
+    clip-path: none !important;
+  }
+}
