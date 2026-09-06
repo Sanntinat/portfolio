@@ -62,9 +62,11 @@ export default function SheetRail() {
         })}
       </ul>
 
-      <div className="flex flex-col items-center gap-3 pb-6">
+      {/* Cota de avance. Va oculta a los lectores de pantalla enteros: quien
+          navega por teclado ya sabe dónde está, y "37" sin contexto no es
+          información sino ruido. */}
+      <div aria-hidden className="flex flex-col items-center gap-3 pb-6">
         <div
-          aria-hidden
           className="relative h-24 w-px bg-rule"
           title="Posición en el pliego"
         >
