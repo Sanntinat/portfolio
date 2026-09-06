@@ -1,3 +1,11 @@
+/**
+ * Dominio público del sitio. Lo usan el metadataBase de las páginas, el
+ * sitemap y robots.txt, así que vive en un solo lugar: si el deploy termina en
+ * otro dominio, se cambia acá y las tres cosas quedan de acuerdo.
+ * TODO(santiago): confirmar el dominio final antes de publicar.
+ */
+export const SITE_URL = "https://santiagonatalichio.dev"
+
 export type SectionRef = {
   /** Referencia de grilla del plano. Es el identificador que usa el riel lateral. */
   ref: string

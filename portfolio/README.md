@@ -1,36 +1,51 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Portfolio — Santiago Natalichio
 
-## Getting Started
+Sitio personal de una página: quién soy, qué construí y cómo contactarme.
+Next.js 16 (App Router), React 19, TypeScript y Tailwind CSS v4. Estático de
+punta a punta: no hay backend, base de datos ni analítica.
 
-First, run the development server:
+- **`PRODUCT.md`** — para quién es el sitio, qué cuenta como éxito y qué no se
+  puede afirmar hasta que haya evidencia.
+- **`DESIGN.md`** — el sistema visual "Plano": la página como hoja de plano,
+  con su paleta, tipografía, retícula y reglas de movimiento.
+
+## Cómo se corre
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+pnpm install
+pnpm dev      # http://localhost:3000
+pnpm build    # build de producción
+pnpm lint
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Cómo está organizado
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+app/            rutas: portada, /projects, /projects/[slug], sitemap, robots, icono
+components/
+  console/      la consola de comandos global (/ o ⌘K)
+  hero/         la traza de La Plata, único momento animado del sitio
+  layout/       cajetín superior, riel de referencia, cajetín de cierre
+  projects/     el índice de proyectos con visor
+  sections/     inicio, perfil, proyectos, contacto
+  ui/           el campo de dibujo y el helper de acciones
+data/projects.ts  las fichas de proyecto
+lib/sections.ts   dominio, secciones A–D, contacto y ruta del CV
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+El sitio no usa librería de componentes: las superficies son reglas de 1px y
+tokens CSS declarados en `app/globals.css`. Cualquier componente nuevo se
+escribe contra esos tokens (`sheet`, `ink`, `rule`, `mark`), no contra una
+paleta importada.
 
-## Learn More
+## Pendientes de Santiago
 
-To learn more about Next.js, take a look at the following resources:
+El código los deja en `null` a propósito, y mientras lo estén el sitio
+directamente no muestra el control en lugar de apuntar a un enlace muerto:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `lib/sections.ts` → `SITE_URL`: confirmar el dominio del deploy.
+- `lib/sections.ts` → `CONTACT.github` y `CONTACT.linkedin`: los perfiles reales.
+- `lib/sections.ts` → `RESUME_URL`: dejar el PDF del CV en `public/` y apuntarlo.
+- `data/projects.ts` → `github`, `demo` e `images` de cada proyecto: los
+  repositorios, las demos desplegadas y las capturas reales. Los textos de las
+  tres fichas son provisionales.

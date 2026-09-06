@@ -7,6 +7,7 @@ import SheetFooter from "@/components/layout/SheetFooter"
 import SheetRail from "@/components/layout/SheetRail"
 import { ThemeProvider } from "@/components/theme-provider"
 import Background from "@/components/ui/background"
+import { SITE_URL } from "@/lib/sections"
 import "./globals.css"
 
 const archivo = Archivo({
@@ -24,7 +25,7 @@ const azeret = Azeret_Mono({
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://santiagonatalichio.dev"),
+  metadataBase: new URL(SITE_URL),
   title: {
     default: "Santiago Natalichio — Ingeniería en Sistemas",
     template: "%s · Santiago Natalichio",

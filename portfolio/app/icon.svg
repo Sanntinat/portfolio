@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!--
+    La traza de La Plata reducida a lo que sobrevive a 16 px: el cuadrado
+    fundacional, las dos diagonales de vértice a vértice y Plaza Moreno en el
+    centro, en el color de marca. La retícula y el rombo de avenidas se caen
+    solos a este tamaño, así que no se dibujan.
+  -->
+  <style>
+    :root { color-scheme: light dark; }
+    .sheet { fill: #e8e6df }
+    .ink   { stroke: #15181a; fill: none; stroke-linecap: square }
+    .mark  { fill: #b4331f }
+    @media (prefers-color-scheme: dark) {
+      .sheet { fill: #0a1a28 }
+      .ink   { stroke: #dce8f1 }
+      .mark  { fill: #e2603d }
+    }
+  </style>
+
+  <rect class="sheet" width="32" height="32" />
+  <rect class="ink" x="4.5" y="4.5" width="23" height="23" stroke-width="2" />
+  <path class="ink" d="M4.5 4.5 27.5 27.5 M27.5 4.5 4.5 27.5" stroke-width="1.5" />
+  <rect class="mark" x="12.5" y="12.5" width="7" height="7" />
+</svg>
