@@ -1,16 +1,30 @@
-import { projects } from "@/data/projects"
-import { notFound } from "next/navigation"
+import type { Metadata } from "next"
 import Image from "next/image"
 import Link from "next/link"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import { ArrowLeft, ExternalLink, Github, Layers3, Sparkles } from "lucide-react"
+import { notFound } from "next/navigation"
+import { ArrowLeft, ArrowRight, ExternalLink, Github } from "lucide-react"
+
+import { actionClass } from "@/components/ui/action"
+import { projects } from "@/data/projects"
 
 export function generateStaticParams() {
-  return projects.map((project) => ({
-    slug: project.slug,
-  }))
+  return projects.map((project) => ({ slug: project.slug }))
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>
+}): Promise<Metadata> {
+  const { slug } = await params
+  const project = projects.find((item) => item.slug === slug)
+
+  if (!project) return {}
+
+  return {
+    title: project.title,
+    description: project.description,
+  }
 }
 
 export default async function ProjectPage({
@@ -19,174 +33,214 @@ export default async function ProjectPage({
   params: Promise<{ slug: string }>
 }) {
   const { slug } = await params
+  const index = projects.findIndex((item) => item.slug === slug)
 
-  const project = projects.find((p) => p.slug === slug)
+  if (index === -1) notFound()
 
-  if (!project) {
-    notFound()
-  }
+  const project = projects[index]
+  const next = projects[(index + 1) % projects.length]
 
   return (
-    <main className="container mx-auto px-6 py-8 sm:py-10 lg:py-16">
-      <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <Button asChild variant="outline" className="w-fit rounded-full px-5">
-          <Link href="/#proyectos">
-            <ArrowLeft className="size-4" />
-            Volver a proyectos
-          </Link>
-        </Button>
+    <article className="mx-auto max-w-[92rem] px-5 pt-12 pb-24 sm:px-8">
+      <Link
+        href="/#proyectos"
+        className="annot group inline-flex items-center gap-2 text-ink-soft transition-colors hover:text-ink"
+      >
+        <ArrowLeft
+          className="size-3.5 transition-transform duration-200 group-hover:-translate-x-1"
+          strokeWidth={1.5}
+        />
+        Volver al índice
+      </Link>
 
-        <span className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-background/70 px-4 py-2 text-sm text-muted-foreground backdrop-blur">
-          <Sparkles className="size-4 text-primary" />
-          Proyecto destacado
-        </span>
-      </div>
+      <header className="mt-10 border-t border-ink pt-6">
+        <h1 className="plot-title max-w-[18ch] text-[clamp(2.25rem,6vw,4.25rem)]">
+          {project.title}
+        </h1>
 
-      <div className="grid gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:items-start">
-        <section className="space-y-8">
-          <div className="space-y-4">
-            <p className="text-xs uppercase tracking-[0.25em] text-muted-foreground sm:text-sm sm:tracking-[0.3em]">
-              {project.tech.join(" · ")}
-            </p>
+        <p className="annot mt-6 text-ink-faint">{project.tech.join(" · ")}</p>
 
-            <h1 className="max-w-3xl text-3xl font-bold tracking-tight sm:text-4xl lg:text-6xl">
-              {project.title}
-            </h1>
+        <p className="measure mt-6 text-lg leading-relaxed text-ink-soft">
+          {project.description}
+        </p>
+      </header>
 
-            <p className="max-w-2xl text-base text-muted-foreground sm:text-lg">
-              {project.description}
-            </p>
-          </div>
-
-          <Card className="overflow-hidden border-border/60 bg-card/80 backdrop-blur-sm">
-            <div className="relative aspect-[16/9] bg-muted">
-              {project.image && (
-                <Image
-                  src={project.image}
-                  alt={project.title}
-                  fill
-                  priority
-                  className="object-cover"
-                />
-              )}
-
-              <div className="absolute inset-0 bg-gradient-to-t from-background/70 via-transparent to-transparent" />
+      <div className="mt-12 grid gap-12 lg:grid-cols-[1fr_20rem] lg:gap-16">
+        <div>
+          <figure className="border border-rule bg-sheet-raised">
+            <div className="relative aspect-[16/9] overflow-hidden bg-sheet-sunk">
+              <Image
+                src={project.image}
+                alt={`Captura de ${project.title}`}
+                fill
+                priority
+                sizes="(max-width: 1024px) 100vw, 60rem"
+                className="object-cover"
+              />
             </div>
-          </Card>
+          </figure>
 
-          <div className="grid gap-6 md:grid-cols-2">
-            <Card className="border-border/60 bg-card/80 backdrop-blur-sm">
-              <CardContent className="space-y-4 p-6">
-                <div className="flex items-center gap-2">
-                  <Layers3 className="size-5 text-primary" />
-                  <h2 className="text-xl font-semibold">Funcionalidades</h2>
+          {project.images.length > 0 && (
+            <div className="mt-4 grid gap-4 sm:grid-cols-2">
+              {project.images.map((src, position) => (
+                <div
+                  key={src}
+                  className="relative aspect-[16/10] overflow-hidden border border-rule bg-sheet-sunk"
+                >
+                  <Image
+                    src={src}
+                    alt={`${project.title}, vista ${position + 2}`}
+                    fill
+                    sizes="(max-width: 640px) 100vw, 30rem"
+                    className="object-cover"
+                  />
                 </div>
+              ))}
+            </div>
+          )}
 
-                <ul className="space-y-3 text-muted-foreground">
-                  {project.features.map((feature) => (
-                    <li key={feature} className="flex gap-3">
-                      <span className="mt-2 size-1.5 rounded-full bg-primary" />
-                      <span>{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-              </CardContent>
-            </Card>
+          <section className="mt-14">
+            <h2 className="plot-heading border-b border-ink pb-3 text-2xl">
+              Funcionalidades
+            </h2>
 
-            <Card className="border-border/60 bg-card/80 backdrop-blur-sm">
-              <CardContent className="space-y-4 p-6">
-                <div className="flex items-center gap-2">
-                  <Github className="size-5 text-primary" />
-                  <h2 className="text-xl font-semibold">Stack</h2>
-                </div>
+            <ul className="mt-1">
+              {project.features.map((feature) => (
+                <li
+                  key={feature}
+                  className="flex gap-4 border-b border-rule-soft py-4 text-ink"
+                >
+                  <span aria-hidden className="mt-2.5 h-px w-4 shrink-0 bg-mark" />
+                  {feature}
+                </li>
+              ))}
+            </ul>
+          </section>
 
-                <div className="flex flex-wrap gap-2">
-                  {project.tech.map((tech) => (
-                    <Badge key={tech} variant="secondary" className="px-3 py-1 text-sm">
-                      {tech}
-                    </Badge>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-          </div>
+          <section className="mt-14">
+            <h2 className="plot-heading border-b border-ink pb-3 text-2xl">
+              Arquitectura
+            </h2>
 
-          <Card className="border-border/60 bg-card/80 backdrop-blur-sm">
-            <CardContent className="space-y-4 p-6">
-              <h2 className="text-xl font-semibold">Arquitectura</h2>
+            <ol className="mt-1">
+              {project.architecture.map((item, position) => (
+                <li
+                  key={item}
+                  className="grid grid-cols-[2.5rem_1fr] items-baseline gap-4 border-b border-rule-soft py-4"
+                >
+                  <span aria-hidden className="annot text-ink-faint tabular-nums">
+                    {String(position + 1).padStart(2, "0")}
+                  </span>
+                  <span className="text-ink">{item}</span>
+                </li>
+              ))}
+            </ol>
+          </section>
+        </div>
 
-              <div className="grid gap-3 sm:grid-cols-2">
-                {project.architecture.map((item, index) => (
-                  <div
-                    key={item}
-                    className="rounded-2xl border border-border/60 bg-background/60 p-4"
-                  >
-                    <p className="text-sm text-muted-foreground">0{index + 1}</p>
-                    <p className="mt-1 font-medium">{item}</p>
-                  </div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
-        </section>
+        <aside className="lg:sticky lg:top-24 lg:self-start">
+          <div className="border border-rule bg-sheet-raised">
+            <h2 className="annot border-b border-rule px-4 py-3 text-ink-soft">
+              Ficha
+            </h2>
 
-        <aside className="space-y-6 lg:sticky lg:top-28">
-          <Card className="border-border/60 bg-background/70 backdrop-blur-xl">
-            <CardContent className="space-y-5 p-6">
-              <div className="space-y-2">
-                <p className="text-sm uppercase tracking-[0.25em] text-muted-foreground">Resumen</p>
-                <h2 className="text-2xl font-semibold">Visión general del proyecto</h2>
-              </div>
+            <dl>
+              <Row field="Stack" value={project.tech.join(", ")} />
 
-              <div className="space-y-4 text-sm text-muted-foreground">
-                <p>
-                  Esta vista está pensada para que cada proyecto se lea como una ficha editorial,
-                  con jerarquía clara y un peso visual consistente con el home.
-                </p>
-                <p>
-                  Si querés, después puedo llevar este mismo lenguaje a las cards y a una galería de
-                  imágenes más completa.
-                </p>
-              </div>
-
-              <div className="space-y-3 rounded-3xl border border-border/60 bg-card/60 p-4">
-                <div className="flex items-center justify-between gap-4 text-sm">
-                  <span className="text-muted-foreground">Tipo</span>
-                  <span className="font-medium">Proyecto web</span>
-                </div>
-                <div className="flex items-center justify-between gap-4 text-sm">
-                  <span className="text-muted-foreground">Estado</span>
-                  <span className="font-medium">Portfolio</span>
-                </div>
-                <div className="flex items-center justify-between gap-4 text-sm">
-                  <span className="text-muted-foreground">Enfoque</span>
-                  <span className="font-medium">Diseño + técnica</span>
-                </div>
-              </div>
-
-              <div className="flex flex-col gap-3 sm:flex-row">
-                {project.github && (
-                  <Button asChild className="rounded-full px-5">
-                    <a href={project.github} target="_blank" rel="noreferrer">
-                      <Github className="size-4" />
-                      Ver código
+              <Row
+                field="Código"
+                value={
+                  project.github ? (
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="underline decoration-rule underline-offset-4 hover:text-mark hover:decoration-mark"
+                    >
+                      Ver repositorio
                     </a>
-                  </Button>
+                  ) : (
+                    <span className="text-ink-soft">Sin publicar</span>
+                  )
+                }
+              />
+
+              <Row
+                field="Demo"
+                value={
+                  project.demo ? (
+                    <a
+                      href={project.demo}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="underline decoration-rule underline-offset-4 hover:text-mark hover:decoration-mark"
+                    >
+                      Abrir demo
+                    </a>
+                  ) : (
+                    <span className="text-ink-soft">Sin desplegar</span>
+                  )
+                }
+              />
+            </dl>
+
+            {(project.github || project.demo) && (
+              <div className="flex flex-col gap-2 border-t border-rule p-4">
+                {project.github && (
+                  <a
+                    href={project.github}
+                    target="_blank"
+                    rel="noreferrer"
+                    className={`${actionClass("solid")} justify-center`}
+                  >
+                    <Github className="size-4" strokeWidth={1.5} />
+                    Ver el código
+                  </a>
                 )}
 
                 {project.demo && (
-                  <Button asChild variant="outline" className="rounded-full px-5">
-                    <a href={project.demo} target="_blank" rel="noreferrer">
-                      <ExternalLink className="size-4" />
-                      Ver demo
-                    </a>
-                  </Button>
+                  <a
+                    href={project.demo}
+                    target="_blank"
+                    rel="noreferrer"
+                    className={`${actionClass()} justify-center`}
+                  >
+                    <ExternalLink className="size-4" strokeWidth={1.5} />
+                    Abrir la demo
+                  </a>
                 )}
               </div>
-            </CardContent>
-          </Card>
+            )}
+          </div>
         </aside>
       </div>
-    </main>
+
+      <nav aria-label="Otros proyectos" className="mt-20 border-t border-ink pt-6">
+        <Link href={`/projects/${next.slug}`} className="group block">
+          <span className="annot text-ink-faint">Siguiente proyecto</span>
+
+          <span className="mt-3 flex items-baseline justify-between gap-6">
+            <span className="plot-heading text-[clamp(1.5rem,3vw,2.25rem)] text-ink transition-colors group-hover:text-mark">
+              {next.title}
+            </span>
+
+            <ArrowRight
+              aria-hidden
+              className="size-6 shrink-0 self-center text-ink-faint transition-all duration-200 group-hover:translate-x-1 group-hover:text-mark"
+              strokeWidth={1.5}
+            />
+          </span>
+        </Link>
+      </nav>
+    </article>
+  )
+}
+
+function Row({ field, value }: { field: string; value: React.ReactNode }) {
+  return (
+    <div className="border-b border-rule-soft px-4 py-4 last:border-b-0">
+      <dt className="annot text-ink-faint">{field}</dt>
+      <dd className="mt-1.5 text-sm leading-relaxed text-ink">{value}</dd>
+    </div>
   )
 }
