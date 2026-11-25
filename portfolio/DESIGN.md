@@ -98,9 +98,15 @@ todo el sitio.
 perímetro, grilla, diagonales y nodos — con `stroke-dashoffset` escalonado y salida
 exponencial (`cubic-bezier(0.16, 1, 0.3, 1)`). Es el plóter dibujando la lámina.
 
+**Luz sobre la mesa de dibujo:** debajo de la retícula, una luz y una sombra muy amplias
+se corren despacio (40–56 s, ida y vuelta), como la luz de una ventana y la sombra de una
+nube sobre el papel, y los cantos se asientan más oscuros. Es ambiente, no un evento: no
+compite con el trazado ni con el contenido.
+
 Todo lo demás responde a una acción de la persona: apertura de la consola, expansión de
 un proyecto, cambio de tema, foco. Nada de entradas por scroll idénticas sección a
-sección. `prefers-reduced-motion` desactiva el trazado y entrega el dibujo terminado.
+sección. `prefers-reduced-motion` desactiva el trazado, deja quieta la luz y entrega todo
+terminado.
 
 ## Superficies del navegador
 
@@ -109,7 +115,10 @@ Selección, cursor de texto, `accent-color`, barra de desplazamiento, anillo de 
 
 ## Interacción distintiva
 
-**La consola.** La terminal del sitio anterior era una caja de vidrio decorativa en el
-hero. Ahora es una consola de comandos global: se abre con `/` o `⌘K` desde cualquier
-parte, navega, abre proyectos, cambia el tema y copia el email. Es la demostración de
-criterio técnico que la página afirma, y funciona con teclado de punta a punta.
+**La consola.** Es una terminal de verdad, global: se abre con `/` o `⌘K` desde
+cualquier parte. Se escribe un comando con su argumento (`ls proyectos`, `cd perfil`,
+`cat onestock`, `open cv`, `whoami`, `sudo hire-me`) y la respuesta se tipea sola, con
+cursor en bloque. Historial con ↑ ↓, sugerencia en gris que se acepta con Tab, `Ctrl+L`
+limpia; abajo, botones con comandos para quien está en el celular. Los comandos son en
+inglés y aceptan alias en español. Es la demostración de criterio técnico que la página
+afirma, y funciona con teclado de punta a punta.
