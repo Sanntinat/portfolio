@@ -30,7 +30,17 @@ const plazas = [0.25, 0.5, 0.75].flatMap((y) =>
   }))
 )
 
-export default function TrazaLaPlata() {
+export default function TrazaLaPlata({
+  label,
+  side,
+  caption,
+  locale,
+}: {
+  label: string
+  side: string
+  caption: string
+  locale: string
+}) {
   const svgRef = useRef<SVGSVGElement>(null)
   const [cursor, setCursor] = useState<{ x: number; y: number } | null>(null)
 
@@ -62,7 +72,7 @@ export default function TrazaLaPlata() {
           ref={svgRef}
           viewBox="0 0 400 400"
           role="img"
-          aria-label="Plano de la traza fundacional de La Plata: un cuadrado con retícula ortogonal, dos diagonales cruzadas, un rombo de avenidas y nueve plazas."
+          aria-label={label}
           className="block w-full"
           onPointerMove={handleMove}
           onPointerLeave={() => setCursor(null)}
@@ -177,19 +187,17 @@ export default function TrazaLaPlata() {
 
         {/* Lectura de coordenadas: es la cota del punto señalado, no un adorno. */}
         <div className="pointer-events-none absolute inset-x-0 bottom-0 flex items-baseline justify-between border-t border-rule bg-sheet-raised px-3 py-2">
-          <span className="annot text-ink-faint">5 196 m de lado</span>
+          <span className="annot text-ink-faint">{side}</span>
           <span className="annot tabular-nums text-ink-soft">
             {readout
-              ? `E ${readout.x.toLocaleString("es-AR")} · S ${readout.y.toLocaleString("es-AR")}`
+              ? `E ${readout.x.toLocaleString(locale)} · S ${readout.y.toLocaleString(locale)}`
               : "—"}
           </span>
         </div>
       </div>
 
       <figcaption className="mt-4 max-w-[46ch] text-sm leading-relaxed text-ink-soft">
-        La Plata se dibujó entera sobre un tablero en 1882: cuadrícula, diagonales
-        y una plaza cada seis cuadras. Es donde estudio ingeniería, y la ciudad que
-        uno de estos proyectos mapea calle por calle.
+        {caption}
       </figcaption>
     </figure>
   )

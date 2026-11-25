@@ -12,9 +12,9 @@ web
 
 ## Stack
 
-Next.js 16 (App Router) · React 19 · TypeScript · Tailwind CSS v4 · shadcn/ui ·
-next-themes · framer-motion. Ya establecido por el repositorio; no es una decisión
-abierta.
+Next.js 16 (App Router) · React 19 · TypeScript · Tailwind CSS v4 · next-themes ·
+lucide-react. Ya establecido por el repositorio; no es una decisión abierta. Se
+despliega en Vercel.
 
 ## Users
 
@@ -33,8 +33,10 @@ El éxito es un mensaje recibido o una descarga del CV, no el tiempo de permanen
 
 ## Positioning
 
-Santiago es estudiante avanzado de Ingeniería en Sistemas de Información y construye
-aplicaciones completas de punta a punta: modelo de datos, API y interfaz. El ángulo que
+Santiago es desarrollador de software y estudiante de último año de Ingeniería en
+Sistemas de Información (UTN La Plata), practicante en el grupo de investigación GIDAS.
+Construye aplicaciones completas de punta a punta: modelo de datos, API, interfaz y las
+pruebas de cada parte. El ángulo que
 un portfolio vecino no puede copiar honestamente es esa combinación de formación en
 ingeniería de sistemas con entrega de producto terminado.
 
@@ -46,28 +48,34 @@ decía "Diseño productos". Se unificó en la primera, que es la verificable.
 
 - Se evalúa en una sesión corta, junto a otros portfolios, casi siempre en desktop.
 - Es probable que el visitante llegue con el CV o el perfil de LinkedIn ya abierto.
-- Idioma: español rioplatense. El voseo del sitio actual es intencional y se conserva.
-- Ubicación: La Plata, Buenos Aires, Argentina.
+- Idiomas: español rioplatense (con voseo, intencional) en `/es` e inglés en `/en`. La
+  raíz manda a uno u otro según el navegador (`proxy.ts`).
+- Ubicación: Quilmes, Buenos Aires, Argentina. Estudia y trabaja en La Plata, por eso el
+  dibujo de la portada sigue siendo su traza.
 
 ## Capabilities and Constraints
 
 - Sitio estático. No hay backend propio: el formulario de contacto compone un `mailto:`
   en el cliente. Sin base de datos, sin autenticación, sin analítica.
-- Tres proyectos en `data/projects.ts`: sistema de turnos odontológicos (Django + React
-  + PostgreSQL), mapa de estacionamiento medido de La Plata (React Native + Expo) y un
-  e-commerce de gimnasio (Django REST + React + Material UI).
-- Los textos de los proyectos son provisionales por pedido explícito de Santiago:
-  el trabajo de esta iteración es visual y funcional, no de contenido.
+- El contenido sale del repo del CV (github.com/Sanntinat/cv, `datos/cv.yaml`), con los
+  mismos hechos y cifras: experiencia en `data/profile.ts`, proyectos en
+  `data/projects.ts`, textos de interfaz en `lib/i18n.ts`.
+- Experiencia: práctica en GIDAS sobre HIDRAGIS. El repositorio es privado y Santiago
+  decidió no publicar capturas: se muestra con un esquema dibujado del ruteo.
+- Proyectos: OneStock (proyecto final), Sistema Inmune, EventHub, turnos odontológicos
+  para el CECQ y el mapa de estacionamiento medido.
 
 ## Evidence on Hand
 
-- Capturas reales de proyectos en `public/projects/eventos/preview1..3.png`.
-- **Ausencias que no deben inventarse:** la URL de GitHub es el placeholder
-  `https://github.com/tu-usuario`, la de LinkedIn es `linkedin.com/in/tu-usuario`, el
-  botón de CV no apunta a ningún archivo, y ningún proyecto tiene demo desplegada
-  (`demo: ""`). No hay testimonios, clientes, métricas ni experiencia laboral
-  confirmada. Nada de eso puede aparecer en el sitio hasta que Santiago lo aporte.
-- Email de contacto real y ya usado en el código: `santiagonatalichio03@gmail.com`.
+- Capturas reales: Sistema Inmune (tablero y alerta de Grafana, arquitectura, topología)
+  y CECQ (listado de turnos), en `public/projects/<slug>/`.
+- OneStock, EventHub y el mapa de estacionamiento no tienen capturas: llevan un esquema
+  por capas (`schematic` en `data/projects.ts`) hasta que Santiago las aporte.
+- GitHub (github.com/Sanntinat), LinkedIn y el CV en PDF (`public/cv/`, en los dos
+  idiomas) son reales.
+- **Ausencias que no deben inventarse:** ningún proyecto tiene demo desplegada, no hay
+  testimonios ni clientes, y CECQ no llegó a usarse en producción.
+- Email de contacto: `santiagonatalichio03@gmail.com`.
 
 ## Product Principles
 

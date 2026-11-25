@@ -1,11 +1,15 @@
-import { ArrowRight, MapPin } from "lucide-react"
+import { ArrowRight, FileText, MapPin } from "lucide-react"
 
-import TrazaLaPlata from "@/components/hero/TrazaLaPlata"
 import ConsoleHint from "@/components/console/ConsoleHint"
+import TrazaLaPlata from "@/components/hero/TrazaLaPlata"
 import { ActionAnchor, ActionLink } from "@/components/ui/action"
-import { CONTACT } from "@/lib/sections"
+import { getDict, type Lang } from "@/lib/i18n"
+import { CONTACT, RESUME } from "@/lib/sections"
 
-export default function Hero() {
+export default function Hero({ lang }: { lang: Lang }) {
+  const dict = getDict(lang)
+  const t = dict.hero
+
   return (
     <section
       id="inicio"
@@ -19,28 +23,25 @@ export default function Hero() {
             Natalichio
           </h1>
 
-          <p className="mt-8 max-w-[38ch] text-lg leading-relaxed text-ink sm:text-xl">
-            Estudiante avanzado de Ingeniería en Sistemas de Información.
-            Construyo aplicaciones completas: modelo de datos, API e interfaz.
-          </p>
+          <p className="mt-8 max-w-[38ch] text-lg leading-relaxed text-ink sm:text-xl">{t.lead}</p>
 
-          <p className="measure mt-4 text-base leading-relaxed text-ink-soft">
-            Trabajo con Django, React y PostgreSQL. Me interesa entrar en un
-            equipo donde el trabajo llegue a producción y lo use alguien.
-          </p>
+          <p className="measure mt-4 text-base leading-relaxed text-ink-soft">{t.body}</p>
 
           <div className="mt-9 flex flex-wrap gap-3">
-            <ActionLink href="#proyectos" variant="solid">
-              Ver proyectos
+            <ActionLink href={`/${lang}#proyectos`} variant="solid">
+              {t.seeProjects}
               <ArrowRight
                 className="size-4 transition-transform duration-200 group-hover/action:translate-x-1"
                 strokeWidth={1.5}
               />
             </ActionLink>
 
-            <ActionAnchor href={`mailto:${CONTACT.email}`}>
-              Escribirme
+            <ActionAnchor href={RESUME[lang]} external>
+              <FileText className="size-4" strokeWidth={1.5} />
+              {t.downloadResume}
             </ActionAnchor>
+
+            <ActionAnchor href={`mailto:${CONTACT.email}`}>{t.writeMe}</ActionAnchor>
           </div>
 
           <ConsoleHint />
@@ -51,7 +52,12 @@ export default function Hero() {
           </p>
         </div>
 
-        <TrazaLaPlata />
+        <TrazaLaPlata
+          label={t.plateLabel}
+          side={t.plateSide}
+          caption={t.plateCaption}
+          locale={dict.locale}
+        />
       </div>
     </section>
   )

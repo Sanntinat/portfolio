@@ -1,46 +1,45 @@
+import type { Bi, Dict, Lang } from "@/lib/i18n"
+
 /**
- * Dominio público del sitio. Lo usan el metadataBase de las páginas, el
- * sitemap y robots.txt, así que vive en un solo lugar: si el deploy termina en
- * otro dominio, se cambia acá y las tres cosas quedan de acuerdo.
- * TODO(santiago): confirmar el dominio final antes de publicar.
+ * Dominio público del sitio. Lo usan el metadataBase, el sitemap y robots.txt.
+ * En Vercel sale del dominio de producción del proyecto; NEXT_PUBLIC_SITE_URL
+ * lo pisa cuando haya un dominio propio.
  */
-export const SITE_URL = "https://santiagonatalichio.dev"
+export const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL ??
+  (process.env.VERCEL_PROJECT_PRODUCTION_URL
+    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+    : "http://localhost:3000")
+
+export type SectionId = keyof Dict["sections"]
 
 export type SectionRef = {
   /** Referencia de grilla del plano. Es el identificador que usa el riel lateral. */
   ref: string
-  id: string
-  label: string
+  id: SectionId
 }
 
 export const SECTIONS: SectionRef[] = [
-  { ref: "A", id: "inicio", label: "Inicio" },
-  { ref: "B", id: "perfil", label: "Perfil" },
-  { ref: "C", id: "proyectos", label: "Proyectos" },
-  { ref: "D", id: "contacto", label: "Contacto" },
+  { ref: "A", id: "inicio" },
+  { ref: "B", id: "experiencia" },
+  { ref: "C", id: "proyectos" },
+  { ref: "D", id: "perfil" },
+  { ref: "E", id: "contacto" },
 ]
 
 export const SECTION_IDS = SECTIONS.map((section) => section.id)
 
 export const CONTACT = {
   email: "santiagonatalichio03@gmail.com",
-  location: "La Plata, Buenos Aires, Argentina",
-  coords: "34°55′S 57°57′O",
-
-  /**
-   * Perfiles reales. Están en null a propósito: los valores anteriores eran
-   * los placeholders `github.com/tu-usuario` y `linkedin.com/in/tu-usuario`, y
-   * un enlace muerto en un portfolio cuesta más que un enlace ausente.
-   * Mientras sean null no se renderiza el botón correspondiente.
-   * TODO(santiago): poner las URLs reales.
-   */
-  github: null as string | null,
-  linkedin: null as string | null,
+  location: "Quilmes, Buenos Aires, Argentina",
+  locationShort: "Quilmes, AR",
+  coords: { es: "34°43′S 58°16′O", en: "34°43′S 58°16′W" } satisfies Bi,
+  github: "https://github.com/Sanntinat",
+  linkedin: "https://www.linkedin.com/in/santiago-natalichio-bestosini/",
 } as const
 
-/**
- * Ruta del CV dentro de /public. Mientras sea null, la acción de CV no se
- * muestra en ninguna parte del sitio en lugar de apuntar a un enlace muerto.
- * TODO(santiago): dejar el PDF en public/ y poner acá su ruta.
- */
-export const RESUME_URL: string | null = null
+/** El CV que sale de github.com/Sanntinat/cv, copiado a public/cv. */
+export const RESUME: Record<Lang, string> = {
+  es: "/cv/Santiago_Natalichio_Bestosini_CV_ES.pdf",
+  en: "/cv/Santiago_Natalichio_Bestosini_CV_EN.pdf",
+}

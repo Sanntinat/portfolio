@@ -3,6 +3,7 @@
 import { useTheme } from "next-themes"
 import { Moon, Sun } from "lucide-react"
 
+import { useI18n } from "@/components/i18n-provider"
 import { useIsClient } from "@/lib/client-hooks"
 
 /**
@@ -12,6 +13,7 @@ import { useIsClient } from "@/lib/client-hooks"
 export function ThemeToggle() {
   const { resolvedTheme, setTheme } = useTheme()
   const isClient = useIsClient()
+  const { t } = useI18n()
   const isDark = resolvedTheme === "dark"
 
   return (
@@ -21,9 +23,9 @@ export function ThemeToggle() {
       aria-label={
         isClient
           ? isDark
-            ? "Usar tema claro"
-            : "Usar tema oscuro"
-          : "Cambiar tema"
+            ? t.theme.toLight
+            : t.theme.toDark
+          : t.theme.toggle
       }
       className="flex size-9 items-center justify-center border border-rule text-ink-soft transition-colors duration-200 hover:border-ink hover:text-ink"
     >

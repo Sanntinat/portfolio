@@ -2,8 +2,10 @@ import { readFileSync } from "node:fs"
 import { join } from "node:path"
 import { ImageResponse } from "next/og"
 
-export const alt =
-  "Santiago Natalichio — estudiante avanzado de Ingeniería en Sistemas en La Plata"
+import { LANGS, getDict, isLang } from "@/lib/i18n"
+import { CONTACT } from "@/lib/sections"
+
+export const alt = "Santiago Natalichio — desarrollador de software / software developer"
 export const size = { width: 1200, height: 630 }
 export const contentType = "image/png"
 
@@ -85,7 +87,14 @@ const annot = {
   color: INK_FAINT,
 }
 
-export default async function Image() {
+export function generateStaticParams() {
+  return LANGS.map((lang) => ({ lang }))
+}
+
+export default async function Image({ params }: { params: Promise<{ lang: string }> }) {
+  const { lang: raw } = await params
+  const lang = isLang(raw) ? raw : "es"
+  const t = getDict(lang)
   return new ImageResponse(
     (
       <div
@@ -141,7 +150,7 @@ export default async function Image() {
           <div style={{ ...annot, display: "flex", color: INK_SOFT }}>
             PORTFOLIO
           </div>
-          <div style={{ ...annot, display: "flex" }}>34°55′S 57°57′O</div>
+          <div style={{ ...annot, display: "flex" }}>{CONTACT.coords[lang]}</div>
         </div>
 
         <div style={{ display: "flex", flex: 1, alignItems: "center" }}>
@@ -189,8 +198,7 @@ export default async function Image() {
                 maxWidth: 560,
               }}
             >
-              Estudiante avanzado de Ingeniería en Sistemas de Información.
-              Construyo aplicaciones completas: modelo de datos, API e interfaz.
+              {t.hero.lead}
             </div>
           </div>
 
@@ -214,7 +222,7 @@ export default async function Image() {
                   padding: "10px 14px",
                 }}
               >
-                5 196 m de lado
+                {t.hero.plateSide}
               </div>
             </div>
           </div>
@@ -231,9 +239,9 @@ export default async function Image() {
           }}
         >
           <div style={{ ...annot, display: "flex", color: INK_SOFT }}>
-            DJANGO · REACT · POSTGRESQL
+            PYTHON · RUBY · REACT · POSTGRESQL
           </div>
-          <div style={{ ...annot, display: "flex" }}>LA PLATA, ARGENTINA</div>
+          <div style={{ ...annot, display: "flex" }}>QUILMES, ARGENTINA</div>
         </div>
       </div>
     ),

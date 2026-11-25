@@ -1,10 +1,11 @@
 "use client"
 
-import Image from "next/image"
 import Link from "next/link"
 import { useState } from "react"
 import { ArrowUpRight } from "lucide-react"
 
+import { useI18n } from "@/components/i18n-provider"
+import ProjectCover from "@/components/projects/ProjectCover"
 import type { Project } from "@/data/projects"
 
 /**
@@ -14,11 +15,12 @@ import type { Project } from "@/data/projects"
  * la fila hacia él.
  */
 export default function ProjectIndex({ projects }: { projects: Project[] }) {
+  const { lang, t } = useI18n()
   const [active, setActive] = useState(0)
   const current = projects[active]
 
   return (
-    <div className="grid gap-10 lg:grid-cols-[1fr_28rem] lg:gap-14">
+    <div className="grid gap-10 *:min-w-0 lg:grid-cols-[1fr_30rem] lg:gap-14">
       <ul className="border-t border-rule">
         {projects.map((project, index) => {
           const isActive = index === active
@@ -26,10 +28,10 @@ export default function ProjectIndex({ projects }: { projects: Project[] }) {
           return (
             <li key={project.slug} className="relative border-b border-rule">
               <Link
-                href={`/projects/${project.slug}`}
+                href={`/${lang}/projects/${project.slug}`}
                 onMouseEnter={() => setActive(index)}
                 onFocus={() => setActive(index)}
-                className="group block py-6 transition-colors duration-200 hover:bg-sheet-raised lg:py-8"
+                className="group block py-6 transition-colors duration-200 hover:bg-sheet-raised lg:py-7"
               >
                 <div className="flex items-start justify-between gap-6 px-1">
                   <div className="min-w-0">
@@ -41,9 +43,9 @@ export default function ProjectIndex({ projects }: { projects: Project[] }) {
                       {project.title}
                     </h3>
 
-                    <p className="annot mt-3 text-ink-faint">
-                      {project.tech.join(" · ")}
-                    </p>
+                    <p className="mt-1.5 text-sm text-ink-soft">{project.context}</p>
+
+                    <p className="annot mt-3 text-ink-faint">{project.tech.slice(0, 5).join(" · ")}</p>
                   </div>
 
                   <ArrowUpRight
@@ -57,20 +59,20 @@ export default function ProjectIndex({ projects }: { projects: Project[] }) {
                   />
                 </div>
 
-                {/* En pantallas angostas no hay visor fijo, así que la captura
+                {/* En pantallas angostas no hay visor fijo, así que la imagen
                     viaja con su fila. */}
                 <div className="relative mt-5 aspect-[16/10] w-full overflow-hidden border border-rule bg-sheet-sunk lg:hidden">
-                  <Image
-                    src={project.image}
-                    alt=""
-                    fill
+                  <ProjectCover
+                    project={project}
                     sizes="100vw"
-                    className="object-cover"
+                    decorative
+                    compact
+                    schematicLabel={t.projects.schematic}
                   />
                 </div>
 
                 <p className="mt-4 max-w-[54ch] text-sm leading-relaxed text-ink-soft lg:hidden">
-                  {project.description}
+                  {project.summary}
                 </p>
               </Link>
 
@@ -90,30 +92,32 @@ export default function ProjectIndex({ projects }: { projects: Project[] }) {
         <div className="sticky top-24 border border-rule bg-sheet-raised">
           <div className="relative aspect-[16/10] overflow-hidden bg-sheet-sunk">
             {projects.map((project, index) => (
-              <Image
+              <div
                 key={project.slug}
-                src={project.image}
-                alt={`Captura de ${project.title}`}
-                fill
-                sizes="28rem"
-                priority={index === 0}
-                className={`object-cover transition-opacity duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+                aria-hidden={index !== active}
+                className={`absolute inset-0 transition-opacity duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
                   index === active ? "opacity-100" : "opacity-0"
                 }`}
-              />
+              >
+                <ProjectCover
+                  project={project}
+                  sizes="30rem"
+                  priority={index === 0}
+                  compact
+                  schematicLabel={t.projects.schematic}
+                />
+              </div>
             ))}
           </div>
 
           <div className="border-t border-rule px-5 py-5">
-            <p className="min-h-[4.5rem] text-sm leading-relaxed text-ink-soft">
-              {current.description}
-            </p>
+            <p className="min-h-[4.5rem] text-sm leading-relaxed text-ink-soft">{current.summary}</p>
 
             <Link
-              href={`/projects/${current.slug}`}
+              href={`/${lang}/projects/${current.slug}`}
               className="mt-4 inline-flex items-center gap-2 text-sm text-ink underline decoration-rule underline-offset-4 transition-colors hover:text-mark hover:decoration-mark"
             >
-              Ver el proyecto
+              {t.projects.seeProject}
               <ArrowUpRight className="size-4" strokeWidth={1.5} />
             </Link>
           </div>

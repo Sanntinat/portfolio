@@ -1,5 +1,6 @@
 "use client"
 
+import { useI18n } from "@/components/i18n-provider"
 import { SECTIONS, SECTION_IDS } from "@/lib/sections"
 import { useActiveSection, useScrollProgress } from "@/lib/use-active-section"
 
@@ -8,12 +9,13 @@ import { useActiveSection, useScrollProgress } from "@/lib/use-active-section"
  * dónde estás mirando; acá hace exactamente ese trabajo y además navega.
  */
 export default function SheetRail() {
+  const { lang, t } = useI18n()
   const active = useActiveSection(SECTION_IDS)
   const progress = useScrollProgress()
 
   return (
     <nav
-      aria-label="Referencias del pliego"
+      aria-label={t.nav.railLabel}
       className="fixed top-0 bottom-0 left-0 z-30 hidden w-14 flex-col justify-between border-r border-rule bg-sheet lg:flex"
     >
       <div aria-hidden className="tick-rail mt-20 h-16 w-full opacity-45" />
@@ -25,8 +27,8 @@ export default function SheetRail() {
           return (
             <li key={section.id} className="relative">
               <a
-                href={`#${section.id}`}
-                aria-label={section.label}
+                href={`/${lang}#${section.id}`}
+                aria-label={t.sections[section.id]}
                 aria-current={isActive ? "true" : undefined}
                 className="group flex h-14 w-14 items-center justify-center border-y border-transparent transition-colors duration-200 hover:bg-sheet-sunk"
               >
@@ -54,7 +56,7 @@ export default function SheetRail() {
                   aria-hidden
                   className="annot pointer-events-none absolute top-1/2 left-full ml-4 -translate-y-1/2 border border-rule bg-sheet-raised px-2 py-1 whitespace-nowrap text-ink opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-focus-visible:opacity-100"
                 >
-                  {section.label}
+                  {t.sections[section.id]}
                 </span>
               </a>
             </li>
@@ -68,7 +70,7 @@ export default function SheetRail() {
       <div aria-hidden className="flex flex-col items-center gap-3 pb-6">
         <div
           className="relative h-24 w-px bg-rule"
-          title="Posición en el pliego"
+          title={t.nav.railProgress}
         >
           <span
             className="absolute -left-[3px] h-px w-[7px] bg-mark"

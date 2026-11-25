@@ -1,5 +1,6 @@
 "use client"
 
+import { useI18n } from "@/components/i18n-provider"
 import { openConsole } from "@/lib/console-bus"
 import { useIsClient } from "@/lib/client-hooks"
 
@@ -9,6 +10,7 @@ import { useIsClient } from "@/lib/client-hooks"
  */
 export default function ConsoleHint() {
   const isClient = useIsClient()
+  const { t } = useI18n()
 
   const shortcut = !isClient
     ? "/"
@@ -27,7 +29,7 @@ export default function ConsoleHint() {
       </span>
 
       <span className="annot flex-1 text-ink-soft transition-colors group-hover:text-ink">
-        Abrir la consola para navegar el sitio
+        {t.hero.consoleHint}
       </span>
 
       <kbd className="annot border border-rule px-1.5 py-0.5 text-ink-faint">
