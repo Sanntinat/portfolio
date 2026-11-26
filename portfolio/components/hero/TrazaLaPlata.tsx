@@ -35,18 +35,18 @@ export default function TrazaLaPlata({
   side,
   caption,
   locale,
+  touchHint,
 }: {
   label: string
   side: string
   caption: string
   locale: string
+  touchHint: string
 }) {
   const svgRef = useRef<SVGSVGElement>(null)
   const [cursor, setCursor] = useState<{ x: number; y: number } | null>(null)
 
-  const handleMove = (event: React.PointerEvent<SVGSVGElement>) => {
-    if (event.pointerType !== "mouse") return
-
+  const place = (event: React.PointerEvent<SVGSVGElement>) => {
     const svg = svgRef.current
     if (!svg) return
 
@@ -55,6 +55,13 @@ export default function TrazaLaPlata({
     const y = ((event.clientY - rect.top) / rect.height) * 400
 
     setCursor(x < O || x > E || y < O || y > E ? null : { x, y })
+  }
+
+  // Con mouse la mira sigue al puntero. Con el dedo, tocar el plano la fija
+  // y arrastrar de costado la mueve; arrastrar hacia arriba o abajo sigue
+  // siendo scroll (touch-action: pan-y), y la mira queda donde estaba.
+  const handleMove = (event: React.PointerEvent<SVGSVGElement>) => {
+    if (event.pointerType === "mouse" || event.buttons > 0) place(event)
   }
 
   // Coordenada del cursor sobre el terreno, en metros desde el vértice noroeste.
@@ -73,9 +80,14 @@ export default function TrazaLaPlata({
           viewBox="0 0 400 400"
           role="img"
           aria-label={label}
-          className="block w-full"
+          className="block w-full touch-pan-y"
+          onPointerDown={(event) => {
+            if (event.pointerType !== "mouse") place(event)
+          }}
           onPointerMove={handleMove}
-          onPointerLeave={() => setCursor(null)}
+          onPointerLeave={(event) => {
+            if (event.pointerType === "mouse") setCursor(null)
+          }}
         >
           {/* 1 · retícula ortogonal */}
           <g
@@ -189,9 +201,14 @@ export default function TrazaLaPlata({
         <div className="pointer-events-none absolute inset-x-0 bottom-0 flex items-baseline justify-between border-t border-rule bg-sheet-raised px-3 py-2">
           <span className="annot text-ink-faint">{side}</span>
           <span className="annot tabular-nums text-ink-soft">
-            {readout
-              ? `E ${readout.x.toLocaleString(locale)} · S ${readout.y.toLocaleString(locale)}`
-              : "—"}
+            {readout ? (
+              `E ${readout.x.toLocaleString(locale)} · S ${readout.y.toLocaleString(locale)}`
+            ) : (
+              <>
+                <span className="hidden [@media(pointer:coarse)]:inline">{touchHint}</span>
+                <span className="[@media(pointer:coarse)]:hidden">—</span>
+              </>
+            )}
           </span>
         </div>
       </div>

@@ -419,7 +419,9 @@ export default function Console() {
       setOpen(true)
       if (!introShown.current) {
         introShown.current = true
-        emit(c.intro.map((text, i) => ({ text, tone: i === 0 ? "strong" : "dim" })))
+        const coarse = window.matchMedia("(pointer: coarse)").matches
+        const intro = coarse ? [c.intro[0], c.introTouch] : c.intro
+        emit(intro.map((text, i) => ({ text, tone: i === 0 ? "strong" : "dim" })))
       }
     }
 
@@ -447,16 +449,23 @@ export default function Console() {
     }
   }, [emit, c])
 
+  // En pantallas táctiles el teclado tapa media consola: no se abre solo,
+  // aparece cuando la persona toca el prompt o la pantalla.
+  const touch = useMemo(
+    () => typeof window !== "undefined" && window.matchMedia("(pointer: coarse)").matches,
+    []
+  )
+
   // Al abrir: bloquea el scroll de fondo y enfoca el prompt.
   useEffect(() => {
     if (!open) return
     const previous = document.body.style.overflow
     document.body.style.overflow = "hidden"
-    inputRef.current?.focus()
+    if (!touch) inputRef.current?.focus()
     return () => {
       document.body.style.overflow = previous
     }
-  }, [open])
+  }, [open, touch])
 
   if (!open) return null
 
@@ -524,8 +533,8 @@ export default function Console() {
 
   const prompt = (
     <span aria-hidden className="shrink-0 whitespace-pre select-none">
-      <span className="text-ink-soft">{c.user}@santiago</span>
-      <span className="text-ink-faint">:</span>
+      <span className="hidden text-ink-soft sm:inline">{c.user}@santiago</span>
+      <span className="hidden text-ink-faint sm:inline">:</span>
       <span className="text-ink">~</span>
       <span className="text-mark">$ </span>
     </span>
@@ -534,7 +543,7 @@ export default function Console() {
   const quick = ["help", "whoami", `ls ${t.sections.proyectos.toLowerCase()}`, "cat onestock", "open cv"]
 
   return (
-    <div className="fixed inset-0 z-50 flex items-start justify-center px-3 pt-[10vh] sm:px-4">
+    <div className="fixed inset-0 z-50 flex justify-center sm:items-start sm:px-4 sm:pt-[10vh]">
       <button
         type="button"
         tabIndex={-1}
@@ -547,9 +556,9 @@ export default function Console() {
         role="dialog"
         aria-modal="true"
         aria-label={c.dialog}
-        className="console-panel relative flex max-h-[78vh] w-full max-w-2xl flex-col border border-ink bg-sheet-raised"
+        className="console-panel relative flex h-[100dvh] w-full max-w-2xl flex-col bg-sheet-raised sm:h-auto sm:max-h-[78vh] sm:border sm:border-ink"
       >
-        <div className="flex items-center justify-between border-b border-ink px-4 py-2">
+        <div className="flex items-center justify-between border-b border-ink py-1.5 pr-2 pl-4 sm:py-2 sm:pr-4">
           <span className="annot text-ink-soft">
             {c.title} <span className="text-ink-faint">· {c.user}@santiago</span>
           </span>
@@ -559,9 +568,9 @@ export default function Console() {
               type="button"
               onClick={close}
               aria-label={c.close}
-              className="flex size-6 items-center justify-center text-ink-soft transition-colors hover:text-ink"
+              className="flex size-9 items-center justify-center text-ink-soft transition-colors hover:text-ink sm:size-6"
             >
-              <X className="size-3.5" strokeWidth={1.5} />
+              <X className="size-4 sm:size-3.5" strokeWidth={1.5} />
             </button>
           </div>
         </div>
@@ -569,7 +578,7 @@ export default function Console() {
         <div
           ref={scrollRef}
           onClick={() => inputRef.current?.focus()}
-          className="console-screen min-h-[16rem] flex-1 cursor-text overflow-y-auto bg-sheet-sunk px-4 py-4 font-mono text-[0.8rem] leading-6 sm:text-[0.84rem]"
+          className="console-screen min-h-0 flex-1 cursor-text overflow-y-auto overscroll-contain bg-sheet-sunk px-4 py-4 font-mono text-[0.88rem] leading-6 sm:min-h-[16rem] sm:text-[0.84rem]"
         >
           <div role="log" aria-live="polite" aria-relevant="additions">
             {lines.map((line, i) => (
@@ -587,7 +596,10 @@ export default function Console() {
           <div className={`flex items-start ${busy ? "opacity-40" : ""}`}>
             {prompt}
             <div className="relative min-w-0 flex-1">
-              <span aria-hidden className="pointer-events-none absolute inset-0 whitespace-pre text-ink-faint">
+              <span
+                aria-hidden
+                className="pointer-events-none absolute inset-0 overflow-hidden whitespace-pre text-[16px] text-ink-faint sm:text-[length:inherit]"
+              >
                 <span className="invisible">{input}</span>
                 {ghostRest}
               </span>
@@ -600,20 +612,21 @@ export default function Console() {
                 }}
                 onKeyDown={handleKeyDown}
                 aria-label={c.inputLabel}
-                placeholder={lines.length || busy ? "" : c.placeholder}
+                placeholder={busy ? "" : c.placeholder}
                 autoComplete="off"
                 autoCorrect="off"
                 autoCapitalize="none"
                 spellCheck={false}
                 enterKeyHint="send"
-                className="console-input relative w-full bg-transparent text-ink outline-none placeholder:text-ink-faint"
+                className="console-input relative w-full bg-transparent text-[16px] text-ink outline-none placeholder:text-ink-faint sm:text-[length:inherit]"
               />
             </div>
           </div>
         </div>
 
-        <div className="flex flex-wrap items-center gap-2 border-t border-rule px-4 py-2.5">
-          <span className="annot text-ink-faint">{c.tryThis}</span>
+        {/* En el celular, una sola fila que se desliza, pegada arriba del teclado. */}
+        <div className="flex items-center gap-2 overflow-x-auto border-t border-rule px-4 py-2.5 [scrollbar-width:none] sm:flex-wrap">
+          <span className="annot shrink-0 text-ink-faint">{c.tryThis}</span>
           {quick.map((q) => (
             <button
               key={q}
@@ -621,9 +634,9 @@ export default function Console() {
               onClick={() => {
                 flush()
                 run(q)
-                inputRef.current?.focus()
+                if (!touch) inputRef.current?.focus()
               }}
-              className="annot border border-rule px-2 py-1 text-ink-soft transition-colors hover:border-ink hover:text-ink"
+              className="annot shrink-0 border border-rule px-2.5 py-1.5 whitespace-nowrap text-ink-soft transition-colors hover:border-ink hover:text-ink sm:px-2 sm:py-1"
             >
               {q}
             </button>
@@ -658,5 +671,8 @@ function Row({ line, prompt }: { line: Line; prompt: React.ReactNode }) {
       </p>
     )
   }
-  return <p className={`whitespace-pre-wrap break-words ${toneClass(line.tone)}`}>{line.text || " "}</p>
+  // Los ítems de una lista ("- ...") llevan sangría colgante: el texto que
+  // pasa de renglón se alinea después del guion.
+  const item = line.text.startsWith("- ") ? "pl-[2ch] -indent-[2ch]" : ""
+  return <p className={`whitespace-pre-wrap break-words ${item} ${toneClass(line.tone)}`}>{line.text || " "}</p>
 }

@@ -66,6 +66,7 @@ const es = {
     plateLabel:
       "Plano de la traza fundacional de La Plata: un cuadrado con retícula ortogonal, dos diagonales cruzadas, un rombo de avenidas y nueve plazas.",
     plateSide: "5 196 m de lado",
+    plateTouchHint: "tocá el plano",
     plateCaption:
       "La Plata se dibujó entera sobre un tablero en 1882: cuadrícula, diagonales y una plaza cada seis cuadras. Es donde estudio, y la ciudad cuyas calles recorre el ruteo de evacuación de HIDRAGIS.",
   },
@@ -174,6 +175,7 @@ const es = {
       "santiago natalichio · portfolio",
       "Escribí help para ver los comandos. Tab completa, ↑ ↓ recorre el historial, Esc cierra.",
     ],
+    introTouch: "Tocá un comando de abajo o escribí help.",
     help: {
       title: "Comandos:",
       whoami: "quién soy",
@@ -262,6 +264,7 @@ const en: Dict = {
     plateLabel:
       "Plan of La Plata's founding layout: a square with an orthogonal grid, two crossing diagonals, a diamond of avenues and nine squares.",
     plateSide: "5,196 m per side",
+    plateTouchHint: "tap the plan",
     plateCaption:
       "La Plata was drawn whole on a drafting table in 1882: a grid, diagonals and a square every six blocks. It's where I study, and the city whose streets HIDRAGIS routes evacuations through.",
   },
@@ -370,6 +373,7 @@ const en: Dict = {
       "santiago natalichio · portfolio",
       "Type help to see the commands. Tab completes, ↑ ↓ walks the history, Esc closes.",
     ],
+    introTouch: "Tap a command below or type help.",
     help: {
       title: "Commands:",
       whoami: "who I am",

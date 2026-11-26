@@ -63,6 +63,9 @@ export async function generateMetadata({
 }
 
 export const viewport: Viewport = {
+  // Con el teclado abierto, la ventana se achica en vez de taparse: la
+  // consola mantiene el prompt y los comandos a la vista.
+  interactiveWidget: "resizes-content",
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "#e8e6df" },
     { media: "(prefers-color-scheme: dark)", color: "#0a1a28" },

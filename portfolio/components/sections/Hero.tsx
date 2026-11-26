@@ -13,17 +13,19 @@ export default function Hero({ lang }: { lang: Lang }) {
   return (
     <section
       id="inicio"
-      className="mx-auto max-w-[92rem] scroll-mt-14 px-5 pt-16 pb-24 sm:px-8 sm:pt-24 lg:pt-28"
+      className="mx-auto flex max-w-[92rem] scroll-mt-14 items-center px-5 pt-12 pb-20 sm:px-8 sm:pt-16 lg:min-h-[calc(100svh-3.5rem)] lg:py-10"
     >
-      <div className="grid items-start gap-14 lg:grid-cols-[1.05fr_0.95fr] lg:gap-20">
+      {/* En escritorio la portada entra entera en la primera pantalla: la
+          lámina se achica con la altura de la ventana, no sólo con el ancho. */}
+      <div className="grid w-full items-center gap-14 lg:grid-cols-[1.05fr_0.95fr] lg:gap-20">
         <div>
-          <h1 className="plot-title text-[clamp(3rem,11vw,6rem)]">
+          <h1 className="plot-title text-[clamp(3rem,min(11vw,12svh),6rem)]">
             Santiago
             <br />
             Natalichio
           </h1>
 
-          <p className="mt-8 max-w-[38ch] text-lg leading-relaxed text-ink sm:text-xl">{t.lead}</p>
+          <p className="mt-8 max-w-[38ch] text-lg leading-relaxed text-ink sm:text-xl [@media(max-height:760px)]:mt-6">{t.lead}</p>
 
           <p className="measure mt-4 text-base leading-relaxed text-ink-soft">{t.body}</p>
 
@@ -46,18 +48,21 @@ export default function Hero({ lang }: { lang: Lang }) {
 
           <ConsoleHint />
 
-          <p className="annot mt-10 flex items-center gap-2 text-ink-faint">
+          <p className="annot mt-8 flex items-center gap-2 text-ink-faint">
             <MapPin className="size-3.5" strokeWidth={1.5} />
             {CONTACT.location}
           </p>
         </div>
 
-        <TrazaLaPlata
-          label={t.plateLabel}
-          side={t.plateSide}
-          caption={t.plateCaption}
-          locale={dict.locale}
-        />
+        <div className="w-full lg:max-w-[calc(100svh-16rem)] lg:justify-self-end">
+          <TrazaLaPlata
+            label={t.plateLabel}
+            side={t.plateSide}
+            caption={t.plateCaption}
+            locale={dict.locale}
+            touchHint={t.plateTouchHint}
+          />
+        </div>
       </div>
     </section>
   )
