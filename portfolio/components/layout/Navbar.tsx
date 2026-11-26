@@ -44,7 +44,7 @@ export default function Navbar() {
       <div className="mx-auto flex h-14 max-w-[92rem] items-center gap-4 px-5 sm:px-8">
         <Link
           href={`/${lang}`}
-          className="plot-heading text-[0.95rem] tracking-tight text-ink transition-colors hover:text-mark"
+          className="plot-heading shrink-0 text-[0.95rem] tracking-tight whitespace-nowrap text-ink transition-colors hover:text-mark"
         >
           Santiago Natalichio
         </Link>
