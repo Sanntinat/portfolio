@@ -67,10 +67,11 @@ decía "Diseño productos". Se unificó en la primera, que es la verificable.
 
 ## Evidence on Hand
 
-- Capturas reales: Sistema Inmune (tablero y alerta de Grafana, arquitectura, topología)
-  y CECQ (listado de turnos), en `public/projects/<slug>/`.
-- OneStock, EventHub y el mapa de estacionamiento no tienen capturas: llevan un esquema
-  por capas (`schematic` en `data/projects.ts`) hasta que Santiago las aporte.
+- Capturas reales en `public/projects/<slug>/`: OneStock (instancia de demo, con los
+  datos del cliente desenfocados), EventHub (deploy en Render, con eventos de demo),
+  Sistema Inmune (tablero y alerta de Grafana, arquitectura, topología) y CECQ.
+- El mapa de estacionamiento no tiene capturas: lleva un esquema por capas
+  (`schematic` en `data/projects.ts`).
 - GitHub (github.com/Sanntinat), LinkedIn y el CV en PDF (`public/cv/`, en los dos
   idiomas) son reales.
 - **Ausencias que no deben inventarse:** ningún proyecto tiene demo desplegada, no hay

@@ -67,7 +67,60 @@ const data: ProjectData[] = [
     to: "present",
     tech: ["Ruby on Rails 8", "PostgreSQL", "React 19", "TypeScript", "MUI", "TanStack Query", "RSpec"],
     github: "https://github.com/proyectoFinalFRLP",
-    shots: [],
+    shots: [
+      {
+        src: "/projects/onestock/panel.png",
+        w: 1520,
+        h: 690,
+        alt: b(
+          "Panel de operación de OneStock con envíos activos, órdenes pendientes, unidades en stock, alertas de inventario y las últimas órdenes y envíos",
+          "OneStock operations dashboard with active shipments, pending orders, units in stock, inventory alerts and the latest orders and shipments"
+        ),
+        caption: b(
+          "El panel de operación de la empresa de demo: envíos activos, órdenes pendientes, stock y alertas.",
+          "The demo company's operations dashboard: active shipments, pending orders, stock and alerts."
+        ),
+      },
+      {
+        src: "/projects/onestock/detalle-orden.png",
+        w: 1520,
+        h: 690,
+        alt: b(
+          "Detalle de una orden con sus líneas, el ciclo de vida del envío, la bitácora del operador logístico y los datos del envío",
+          "Order detail with its lines, the shipment lifecycle, the courier log and the shipment data"
+        ),
+        caption: b(
+          "Detalle de una orden con el ciclo de vida del envío y la bitácora del operador logístico. Los datos del cliente están desenfocados.",
+          "An order's detail with the shipment lifecycle and the courier log. The customer's data is blurred."
+        ),
+      },
+      {
+        src: "/projects/onestock/nueva-orden.png",
+        w: 1520,
+        h: 690,
+        alt: b(
+          "Primer paso del asistente de pedido manual, con los datos del cliente y la carga de productos",
+          "First step of the manual order wizard, with the customer's data and product entry"
+        ),
+        caption: b(
+          "Paso 1 de 3 del asistente de pedido manual: cliente y productos.",
+          "Step 1 of 3 of the manual order wizard: customer and products."
+        ),
+      },
+      {
+        src: "/projects/onestock/envios.png",
+        w: 1520,
+        h: 690,
+        alt: b(
+          "Listado de envíos con pestañas por estado, operador logístico, número de seguimiento, costo y estado",
+          "Shipments list with status tabs, courier, tracking number, cost and status"
+        ),
+        caption: b(
+          "Los envíos de la empresa por estado, con el seguimiento y el costo de cada operador.",
+          "The company's shipments by status, with each courier's tracking and cost."
+        ),
+      },
+    ],
     schematic: [
       {
         title: b("Canales", "Channels"),
@@ -266,7 +319,47 @@ const data: ProjectData[] = [
     to: "2025-07",
     tech: ["Python", "Django", "Playwright", "GitHub Actions", "Render"],
     github: "https://github.com/maxi-lab/eventhub",
-    shots: [],
+    shots: [
+      {
+        src: "/projects/eventhub/eventos.png",
+        w: 1480,
+        h: 520,
+        alt: b(
+          "Listado de eventos con título, descripción, fecha, estado, categoría, acciones y la estrella de favorito",
+          "Event list with title, description, date, status, category, actions and the favorite star"
+        ),
+        caption: b(
+          "El listado de eventos, con la estrella para marcar favoritos. Los eventos son datos de demo.",
+          "The event list, with the star to mark favorites. The events are demo data."
+        ),
+      },
+      {
+        src: "/projects/eventhub/favoritos.png",
+        w: 1480,
+        h: 330,
+        alt: b(
+          "Listado filtrado que muestra sólo los dos eventos marcados como favoritos",
+          "Filtered list showing only the two events marked as favorites"
+        ),
+        caption: b(
+          "El filtro de favoritos, una de las partes que construí.",
+          "The favorites filter, one of the parts I built."
+        ),
+      },
+      {
+        src: "/projects/eventhub/detalle.png",
+        w: 1480,
+        h: 720,
+        alt: b(
+          "Detalle de un evento con fecha, organizador, ubicación, categoría, estado y entradas vendidas",
+          "Event detail with date, organizer, venue, category, status and tickets sold"
+        ),
+        caption: b(
+          "El detalle de un evento, con las entradas vendidas.",
+          "An event's detail, with the tickets sold."
+        ),
+      },
+    ],
     schematic: [
       { title: b("Push", "Push"), nodes: [b("Rama en GitHub", "GitHub branch")] },
       {
