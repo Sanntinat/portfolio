@@ -12,12 +12,14 @@ const nextConfig: NextConfig = {
     return [
       { source: "/projects", destination: "/es/projects", permanent: true },
       { source: "/projects/sistema-eventos", destination: "/es/projects/cecq", permanent: true },
+      { source: "/projects/mapa-estacionamiento-la-plata", destination: "/es/projects", permanent: true },
+      { source: "/projects/api-reservas", destination: "/es/projects/powerfit", permanent: true },
+      // El mapa de estacionamiento salió del portfolio; su ficha manda al listado.
       {
-        source: "/projects/mapa-estacionamiento-la-plata",
-        destination: "/es/projects/estacionamiento",
+        source: "/:lang(es|en)/projects/estacionamiento",
+        destination: "/:lang/projects",
         permanent: true,
       },
-      { source: "/projects/api-reservas", destination: "/es/projects", permanent: true },
       { source: "/projects/:slug", destination: "/es/projects/:slug", permanent: true },
     ]
   },

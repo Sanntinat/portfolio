@@ -97,7 +97,7 @@ const es = {
     allTitle: "Proyectos",
     allLead: "Todo lo que construí hasta ahora, con su contexto, su stack y dónde está el código.",
     allMetaDescription:
-      "Proyectos de Santiago Natalichio: OneStock, Sistema Inmune, EventHub, turnos odontológicos para el CECQ y un mapa de estacionamiento medido.",
+      "Proyectos de Santiago Natalichio: OneStock, Sistema Inmune, EventHub, turnos odontológicos para el CECQ y la tienda online PowerFit.",
     hasCode: "Con código",
     privateCode: "Código privado",
     back: "Volver al índice",
@@ -295,7 +295,7 @@ const en: Dict = {
     allTitle: "Projects",
     allLead: "Everything I've built so far, with its context, its stack and where the code lives.",
     allMetaDescription:
-      "Projects by Santiago Natalichio: OneStock, Sistema Inmune, EventHub, a dental scheduling system for CECQ and a metered parking map.",
+      "Projects by Santiago Natalichio: OneStock, Sistema Inmune, EventHub, a dental scheduling system for CECQ and the PowerFit online store.",
     hasCode: "Code available",
     privateCode: "Private code",
     back: "Back to the index",

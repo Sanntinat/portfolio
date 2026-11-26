@@ -441,36 +441,102 @@ const data: ProjectData[] = [
     ],
   },
   {
-    slug: "estacionamiento",
-    title: b("Mapa de Estacionamiento Medido", "Metered Parking Map"),
-    context: b("Desarrollo de Aplicaciones Móviles · equipo de 4", "Mobile Development course · team of 4"),
+    slug: "powerfit",
+    title: b("PowerFit", "PowerFit"),
+    context: b("Proyecto de la UTN · equipo de 4", "University project · team of 4"),
     summary: b(
-      "App móvil con un mapa de La Plata que muestra qué calles tienen estacionamiento medido.",
-      "Mobile app with a map of La Plata showing which streets have metered parking."
+      "Tienda online de un gimnasio, con suplementos, equipamiento y productos de kinesiología, integrada con el sistema que arma las rutinas de los socios.",
+      "Online store for a gym, selling supplements, equipment and physiotherapy products, integrated with the system that builds members' routines."
     ),
-    from: "2025-07",
-    to: "2025-08",
-    tech: ["React Native", "Expo", "TypeScript", "React Native Maps", "Expo Location"],
-    github: "https://github.com/BaltaMolteni/DAM-TPFINAL",
-    shots: [],
-    schematic: [
-      { title: b("App · Expo", "App · Expo"), nodes: [b("React Native + TypeScript", "React Native + TypeScript")] },
+    from: "2024-09",
+    to: "2025-02",
+    tech: ["Django REST Framework", "React", "Material UI", "PostgreSQL", "Docker", "GitHub Actions"],
+    // El repositorio público tiene credenciales de la base en settings.py:
+    // no se enlaza hasta limpiarlo.
+    github: null,
+    shots: [
       {
-        title: b("Mapa", "Map"),
-        nodes: [b("Calles con estacionamiento medido", "Metered-parking streets"), b("Límite de la zona", "Zone boundary")],
+        src: "/projects/powerfit/inicio.png",
+        w: 1240,
+        h: 576,
+        alt: b(
+          "Portada de PowerFit con el buscador, la cuenta, el carrito y el mensaje de bienvenida sobre una foto de un levantamiento",
+          "PowerFit home page with search, account, cart and the welcome message over a weightlifting photo"
+        ),
+        caption: b(
+          "La portada de la tienda. Las capturas salen del video de la demo.",
+          "The store's home page. The screenshots come from the demo video."
+        ),
       },
-      { title: b("Dispositivo", "Device"), nodes: [b("Ubicación del auto", "Car location"), b("Expo Location", "Expo Location")] },
+      {
+        src: "/projects/powerfit/busqueda.png",
+        w: 1240,
+        h: 576,
+        alt: b(
+          "Resultados de búsqueda con filtros por categoría y precio, y tarjetas de productos con su precio",
+          "Search results with category and price filters, and product cards with prices"
+        ),
+        caption: b(
+          "Búsqueda con filtros por categoría y rango de precio.",
+          "Search with category and price range filters."
+        ),
+      },
+      {
+        src: "/projects/powerfit/cuenta.png",
+        w: 1240,
+        h: 576,
+        alt: b(
+          "Menú de la cuenta con Mis compras, Cambiar contraseña y Panel administrativo, y el diálogo para cambiar la contraseña",
+          "Account menu with My purchases, Change password and Admin panel, and the change-password dialog"
+        ),
+        caption: b(
+          "El menú de la cuenta y el cambio de contraseña, parte de lo que construí.",
+          "The account menu and the password change, part of what I built."
+        ),
+      },
+      {
+        src: "/projects/powerfit/mis-compras.png",
+        w: 1240,
+        h: 576,
+        alt: b(
+          "Historial de compras del usuario con una compra desplegada que muestra sus productos, cantidades y subtotales",
+          "The user's purchase history with one purchase expanded to show its products, quantities and subtotals"
+        ),
+        caption: b(
+          "«Mis compras»: el historial de cada usuario, con el detalle de cada compra.",
+          "“My purchases”: each user's history, with the detail of every purchase."
+        ),
+      },
     ],
     highlights: [
       b(
-        "Desarrollé la ubicación del auto en el mapa y el límite de la zona de estacionamiento medido",
-        "Built the car's location on the map and the boundary of the metered-parking zone"
+        "Construí el login, el registro y el cambio de contraseña, de las pantallas en React a la API en Django REST Framework",
+        "Built sign-in, sign-up and password change, from the React screens to the Django REST Framework API"
+      ),
+      b(
+        "Desarrollé el flujo de compra: finalizar compra, el historial de «Mis compras» y los estados de cada venta (pendiente, finalizada, cancelada), con su cancelación",
+        "Developed the purchase flow: checkout, the “My purchases” history and each sale's status (pending, completed, cancelled), including cancellation"
+      ),
+      b(
+        "Calculé la popularidad de los productos con cookies e integré la tienda con el sistema de kinesiología del gimnasio, que recomienda productos según la rutina de cada socio",
+        "Computed product popularity with cookies and integrated the store with the gym's physiotherapy system, which recommends products from each member's routine"
+      ),
+      b(
+        "Armé la imagen Docker del proyecto y el workflow de GitHub Actions que la construye",
+        "Set up the project's Docker image and the GitHub Actions workflow that builds it"
       ),
     ],
     architecture: [
-      b("React Native con Expo y TypeScript", "React Native with Expo and TypeScript"),
-      b("Mapa con React Native Maps", "Map with React Native Maps"),
-      b("Geolocalización con Expo Location", "Geolocation with Expo Location"),
+      b(
+        "API REST en Django REST Framework con PostgreSQL, separada en apps de productos, ventas, autenticación e integración",
+        "REST API in Django REST Framework with PostgreSQL, split into apps for products, sales, authentication and integration"
+      ),
+      b("Frontend en React con Material UI y React Router, compilado con Vite", "Front end in React with Material UI and React Router, built with Vite"),
+      b(
+        "Catálogo cargado con scrapers en Python (Selenium) de dos tiendas de deportes y salud",
+        "Catalog loaded with Python scrapers (Selenium) from two sports and health stores"
+      ),
+      b("Imagen Docker construida en GitHub Actions", "Docker image built in GitHub Actions"),
     ],
   },
 ]

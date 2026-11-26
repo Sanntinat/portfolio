@@ -50,9 +50,9 @@ Los hechos y las cifras son los del CV (github.com/Sanntinat/cv, `datos/cv.yaml`
 
 1. Dejar la imagen en `public/projects/<slug>/`.
 2. Agregarla a `shots` del proyecto en `data/projects.ts`, con su tamaño real (`w`, `h`), el texto alternativo y el epígrafe en los dos idiomas. Las que tienen texto chico o son diagramas van con `fit: "contain"`.
-3. La primera captura reemplaza al esquema en el índice y en la ficha. Sólo el mapa de estacionamiento sigue con esquema.
+3. La primera captura reemplaza al esquema en el índice y en la ficha. Hoy todos los proyectos tienen capturas; el esquema queda para el que no las tenga.
 
-Las capturas de OneStock salen de la instancia de demo (`norte.onestock.duckdns.org`) y las de EventHub, de su deploy en Render con una cuenta y eventos de demo. Datos de personas reales, como los de un cliente, se desenfocan antes de capturar.
+Las capturas de OneStock salen de la instancia de demo (`norte.onestock.duckdns.org`); las de EventHub, de su deploy en Render con una cuenta y eventos de demo; y las de PowerFit, del video de la demo. Datos de personas reales, como los de un cliente, se desenfocan antes de capturar.
 
 ## Dominio
 

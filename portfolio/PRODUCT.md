@@ -63,15 +63,15 @@ decía "Diseño productos". Se unificó en la primera, que es la verificable.
 - Experiencia: práctica en GIDAS sobre HIDRAGIS. El repositorio es privado y Santiago
   decidió no publicar capturas: se muestra con un esquema dibujado del ruteo.
 - Proyectos: OneStock (proyecto final), Sistema Inmune, EventHub, turnos odontológicos
-  para el CECQ y el mapa de estacionamiento medido.
+  para el CECQ y la tienda online PowerFit.
 
 ## Evidence on Hand
 
 - Capturas reales en `public/projects/<slug>/`: OneStock (instancia de demo, con los
   datos del cliente desenfocados), EventHub (deploy en Render, con eventos de demo),
   Sistema Inmune (tablero y alerta de Grafana, arquitectura, topología) y CECQ.
-- El mapa de estacionamiento no tiene capturas: lleva un esquema por capas
-  (`schematic` en `data/projects.ts`).
+- PowerFit: capturas del video de la demo. Su repositorio público tiene credenciales
+  de la base en `settings.py`, así que la ficha no lo enlaza hasta que se limpie.
 - GitHub (github.com/Sanntinat), LinkedIn y el CV en PDF (`public/cv/`, en los dos
   idiomas) son reales.
 - **Ausencias que no deben inventarse:** ningún proyecto tiene demo desplegada, no hay
